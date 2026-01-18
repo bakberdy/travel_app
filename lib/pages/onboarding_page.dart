@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/context_extensions.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -15,12 +16,57 @@ class OnboardingPage extends StatelessWidget {
             top: 120,
             right: 0,
             left: 0,
-            child: Align(
-              alignment: .topCenter,
-              child: Text(
-                'Aspen',
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
+            bottom: 40,
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                Center(
+                  child: Text(
+                    'Aspen',
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                ),
+                Spacer(),
+
+                Padding(
+                  padding: const .symmetric(horizontal: 16),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Plan your\n',
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            fontSize: 24,
+                            fontWeight: .w400,
+                            color: context.colorScheme.onPrimary,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Luxurious Vacation',
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            fontWeight: .w600,
+                            fontSize: 40,
+                            height: 1.2,
+                            color: context.colorScheme.onPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Padding(
+                  padding: .symmetric(horizontal: 16),
+                  child: SizedBox(
+                    height: 52,
+                    width: .infinity,
+                    child: FilledButton(
+                      onPressed: () {},
+                      child: Text('Explore'),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

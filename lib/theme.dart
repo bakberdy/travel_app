@@ -63,5 +63,8 @@ class AppTheme {
         fontSize: 10,
       ), //rating or label of small cards
     ),
+    buttonTheme: ButtonThemeData(
+     
+    )
   );
 }
