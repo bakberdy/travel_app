@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarThemeData(
+      backgroundColor: Colors.white,
+    ),
     colorScheme: ColorScheme(
       brightness: .light,
       primary: Color(0xff176EF1),
@@ -26,13 +30,13 @@ class AppTheme {
       displayMedium: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 32,
-        fontWeight: .w700,
+        fontWeight: .w500,
       ),
 
       titleLarge: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 18,
-        fontWeight: .w600,
+        fontWeight: .w500,
       ), //section titles
       titleMedium: TextStyle(
         fontFamily: 'Montserrat',
