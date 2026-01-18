@@ -18,7 +18,50 @@ class AppTheme {
       onSurface: Colors.black,
     ),
     textTheme: TextTheme(
-      
-    )
+      displayLarge: TextStyle(
+        fontFamily: 'Hiatus',
+        fontSize: 116,
+        color: Colors.white
+      ),
+      displayMedium: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 32,
+        fontWeight: .w700,
+      ),
+
+      titleLarge: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 18,
+        fontWeight: .w600,
+      ), //section titles
+      titleMedium: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 14,
+        fontWeight: .w500,
+      ), //card titles
+      titleSmall: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 12,
+        fontWeight: .w500,
+      ), //card titles
+
+      bodyMedium: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 14,
+      ), //the main content style
+
+      labelLarge: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 14,
+      ), // text on tabs
+      labelMedium: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 12,
+      ), // text inside a chips
+      labelSmall: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 10,
+      ), //rating or label of small cards
+    ),
   );
 }

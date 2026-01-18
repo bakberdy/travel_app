@@ -11,6 +11,18 @@ class OnboardingPage extends StatelessWidget {
           Positioned.fill(
             child: Image.asset('assets/images/onboarding_bg.png', fit: .cover),
           ),
+          Positioned(
+            top: 120,
+            right: 0,
+            left: 0,
+            child: Align(
+              alignment: .topCenter,
+              child: Text(
+                'Aspen',
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+            ),
+          ),
         ],
       ),
     );
