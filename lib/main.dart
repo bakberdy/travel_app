@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/pages/onboarding_page.dart';
+import 'package:travel_app/pages/home_page.dart';
 import 'package:travel_app/theme.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
-      home: OnboardingPage(),
+      home: HomePage(),
     );
   }
 }

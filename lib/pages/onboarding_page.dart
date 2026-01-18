@@ -27,7 +27,6 @@ class OnboardingPage extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-
                 Padding(
                   padding: const .symmetric(horizontal: 16),
                   child: RichText(
@@ -54,7 +53,7 @@ class OnboardingPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 20,),
                 Padding(
                   padding: .symmetric(horizontal: 16),
                   child: SizedBox(
