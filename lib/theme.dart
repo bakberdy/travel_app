@@ -63,8 +63,18 @@ class AppTheme {
         fontSize: 10,
       ), //rating or label of small cards
     ),
-    buttonTheme: ButtonThemeData(
-     
-    )
+  
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        textStyle: TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 16,
+          fontWeight: .w600
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+    ),
   );
 }
