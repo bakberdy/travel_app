@@ -4,10 +4,16 @@ import 'package:travel_app/widgets/category_header.dart';
 import 'package:travel_app/widgets/route_card.dart';
 
 class CategorySection extends StatelessWidget {
-  const CategorySection({super.key, required this.routes, required this.title});
+  const CategorySection({
+    super.key,
+    required this.routes,
+    required this.title,
+     this.onSeeAll,
+  });
 
   final List<RouteEntity> routes;
   final String title;
+  final VoidCallback? onSeeAll;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +23,7 @@ class CategorySection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: CategoryHeader(
             title: title,
-            onSeeAllTapped: () {
-              debugPrint("Popular see all tapped");
-            },
+            onSeeAllTapped: onSeeAll,
           ),
         ),
         SizedBox(height: 10),
