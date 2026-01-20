@@ -38,7 +38,6 @@ void main() {
               controller: controller,
               onClear: () {
                 wasCleared = true;
-                controller.clear();
               },
             ),
           ),

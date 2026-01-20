@@ -47,9 +47,6 @@ class _HomePageState extends State<HomePage> {
               child: CustomSearchBar(
                 hintText: 'Find things to do',
                 controller: _searchController,
-                onClear: () {
-                  _searchController.clear();
-                },
               ),
             ),
           ),

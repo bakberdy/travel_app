@@ -13,6 +13,7 @@ class CustomSearchBar extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
+  ///not need to add controller.clear it done by default
   final VoidCallback? onClear;
   final String? hintText;
 
@@ -33,7 +34,10 @@ class CustomSearchBar extends StatelessWidget {
                     return SizedBox();
                   }
                   return IconButton(
-                    onPressed: onClear,
+                    onPressed: (){
+                      onClear?.call();
+                      controller?.clear();
+                    },
                     icon: Icon(
                       Icons.clear,
                       color: context.colorScheme.onSurface,
