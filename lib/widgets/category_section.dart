@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/entities/route_entity.dart';
-import 'package:travel_app/widgets/category_header.dart';
+import 'package:travel_app/widgets/route_type_section_header.dart';
 import 'package:travel_app/widgets/route_card.dart';
 
 class RouteTypeSection extends StatelessWidget {
@@ -21,7 +21,7 @@ class RouteTypeSection extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: CategoryHeader(
+          child: RouteTypeSectionHeader(
             title: title,
             onSeeAllTapped: onSeeAll,
           ),

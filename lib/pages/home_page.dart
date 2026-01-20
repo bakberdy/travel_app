@@ -3,7 +3,8 @@ import 'package:travel_app/utils/context_extensions.dart';
 import 'package:travel_app/entities/location_entity.dart';
 import 'package:travel_app/entities/route_entity.dart';
 import 'package:travel_app/pages/routes_page.dart';
-import 'package:travel_app/widgets/route_type_section.dart';
+import 'package:travel_app/types/route_type.dart';
+import 'package:travel_app/widgets/category_section.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/location_button.dart';
 
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage>
   late final TabController _categoriesTabbarController;
   @override
   void initState() {
-    _categoriesTabbarController = TabController(length: 4, vsync: this);
+    _categoriesTabbarController = TabController(length: RouteType.values.length, vsync: this);
     super.initState();
   }
 
@@ -91,18 +92,16 @@ class _HomePageState extends State<HomePage>
               ),
               indicatorSize: .tab,
               splashBorderRadius: .circular(16),
-              tabs: [
-                Tab(text: 'Peak'),
-                Tab(text: 'Waterfall'),
-                Tab(text: 'Lake'),
-                Tab(text: 'Route'),
-              ],
+              tabs: RouteType.values.map((type) {
+                final name = type.name[0].toUpperCase() + type.name.substring(1);
+                return Tab(text: name);
+              }).toList(),
               controller: _categoriesTabbarController,
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: 15)),
           SliverToBoxAdapter(
-            child: RouteTypeSection(
+            child: CategorySection(
               onSeeAll: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoutesPage())),
               routes: [sampleRoute, sampleRoute, sampleRoute],
               title: 'Popular',
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage>
           ),
           SliverToBoxAdapter(child: SizedBox(height: 15)),
           SliverToBoxAdapter(
-            child: RouteTypeSection(
+            child: CategorySection(
               routes: [sampleRoute, sampleRoute, sampleRoute],
               title: 'Recommend',
             ),
