@@ -3,6 +3,7 @@ import 'package:travel_app/entities/location_entity.dart';
 import 'package:travel_app/entities/route_entity.dart';
 import 'package:travel_app/types/route_filtering_method.dart';
 import 'package:travel_app/types/route_sorting_method.dart';
+import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/filter_chip.dart';
 import 'package:travel_app/widgets/horizontal_route_card.dart';
 import 'package:travel_app/widgets/sorting_chip.dart';
@@ -75,41 +76,50 @@ class _RoutesPageState extends State<RoutesPage> {
               SizedBox(width: 10),
             ],
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(30),
-              child: Container(
-                padding: .only(bottom: 5),
-                height: 30,
-                child: ListView(
-                  padding: .symmetric(horizontal: 16),
-                  scrollDirection: .horizontal,
-                  children: [
-                    SortingChip(
-                      sortingMethod: sortingMethod,
-                      onTap: () {},
+              preferredSize: Size.fromHeight(90),
+              child: Column(
+                children: [
+                  Padding(padding: .symmetric(horizontal: 16),
+                  child: CustomSearchBar(
+                    hintText: 'Find Your Route',
+                  )),
+                  SizedBox(height: 10,),
+                  Container(
+                    padding: .only(bottom: 5),
+                    height: 30,
+                    child: ListView(
+                      padding: .symmetric(horizontal: 16),
+                      scrollDirection: .horizontal,
+                      children: [
+                        SortingChip(
+                          sortingMethod: sortingMethod,
+                          onTap: () {},
+                        ),
+                        if (filteringMethods != null && filteringMethods!.isNotEmpty) ...[
+                          Center(
+                            child: SizedBox(
+                              height: 25,
+                              child: VerticalDivider(
+                                color: Theme.of(context).colorScheme.outline,
+                                thickness: 2,
+                              ),
+                            ),
+                          ),
+                          ...filteringMethods!.map(
+                            (filter) => Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: FilteringChip(
+                                filteringMethod: filter,
+                                onTap: () {},
+                                onRemoveTap: () {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
-                    if (filteringMethods != null && filteringMethods!.isNotEmpty) ...[
-                      Center(
-                        child: SizedBox(
-                          height: 25,
-                          child: VerticalDivider(
-                            color: Theme.of(context).colorScheme.outline,
-                            thickness: 2,
-                          ),
-                        ),
-                      ),
-                      ...filteringMethods!.map(
-                        (filter) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: FilteringChip(
-                            filteringMethod: filter,
-                            onTap: () {},
-                            onRemoveTap: () {},
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
