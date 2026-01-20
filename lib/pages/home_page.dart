@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
             padding: .symmetric(horizontal: 16),
             sliver: SliverToBoxAdapter(
               child: CustomSearchBar(
+                hintText: 'Find things to do',
                 controller: _searchController,
                 onClear: () {
                   _searchController.clear();

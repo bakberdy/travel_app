@@ -8,11 +8,13 @@ class CustomSearchBar extends StatelessWidget {
     this.onSubmitted,
     this.onChanged,
     this.onClear,
+    this.hintText,
   });
   final TextEditingController? controller;
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
   final VoidCallback? onClear;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class CustomSearchBar extends StatelessWidget {
                   );
                 },
               ),
-        hintText: 'Find things to do',
+        hintText: hintText,
         prefixIcon: Icon(Icons.search),
         fillColor: context.colorScheme.surfaceContainer,
         filled: true,
