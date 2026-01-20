@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:travel_app/utils/context_extensions.dart';
-import 'package:travel_app/pages/routes_page.dart';
 import 'package:travel_app/types/route_filtering_method.dart';
 import 'package:travel_app/utils/string_extensions.dart';
 
