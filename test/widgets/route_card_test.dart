@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:travel_app/entities/location_entity.dart';
 import 'package:travel_app/entities/route_entity.dart';
+import 'package:travel_app/types/route_difficulty.dart';
 import 'package:travel_app/widgets/route_card.dart';
 import 'package:travel_app/widgets/labeled_icon.dart';
 

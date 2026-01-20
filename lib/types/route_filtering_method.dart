@@ -1,5 +1,5 @@
 
-import 'package:travel_app/entities/route_entity.dart';
+import 'package:travel_app/types/route_difficulty.dart';
 
 sealed class RouteFilteringMethod {
   const RouteFilteringMethod();

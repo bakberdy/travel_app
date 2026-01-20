@@ -5,6 +5,7 @@ import 'package:travel_app/types/route_filtering_method.dart';
 import 'package:travel_app/types/route_sorting_method.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/filter_chip.dart';
+import 'package:travel_app/widgets/filtering_bottom_sheet.dart';
 import 'package:travel_app/widgets/horizontal_route_card.dart';
 import 'package:travel_app/widgets/sorting_bottom_sheet.dart';
 import 'package:travel_app/widgets/sorting_chip.dart';
@@ -81,7 +82,17 @@ class _RoutesPageState extends State<RoutesPage> {
               ),
               SizedBox(width: 10),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  FilteringBottomSheet.show(
+                    context,
+                    initialFilters: filteringMethods,
+                    onApplyFilters: (filters) {
+                      setState(() {
+                        filteringMethods = filters.isEmpty ? null : filters;
+                      });
+                    },
+                  );
+                },
                 child: Image.asset('assets/icons/filter.png', height: 22, width: 22),
               ),
               SizedBox(width: 10),

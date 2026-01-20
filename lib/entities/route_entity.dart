@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:travel_app/entities/location_entity.dart';
+import 'package:travel_app/types/route_difficulty.dart';
 
 class RouteEntity extends Equatable {
   final String title;
@@ -27,4 +28,4 @@ class RouteEntity extends Equatable {
   List<Object?> get props => [title, description, location, coordinates];
 }
 
-enum RouteDifficulty { easy, medium, hard }
+
