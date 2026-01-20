@@ -3,8 +3,8 @@ import 'package:travel_app/entities/route_entity.dart';
 import 'package:travel_app/widgets/category_header.dart';
 import 'package:travel_app/widgets/route_card.dart';
 
-class CategorySection extends StatelessWidget {
-  const CategorySection({
+class RouteTypeSection extends StatelessWidget {
+  const RouteTypeSection({
     super.key,
     required this.routes,
     required this.title,

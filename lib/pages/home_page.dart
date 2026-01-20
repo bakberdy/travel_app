@@ -3,7 +3,7 @@ import 'package:travel_app/utils/context_extensions.dart';
 import 'package:travel_app/entities/location_entity.dart';
 import 'package:travel_app/entities/route_entity.dart';
 import 'package:travel_app/pages/routes_page.dart';
-import 'package:travel_app/widgets/category_section.dart';
+import 'package:travel_app/widgets/route_type_section.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/location_button.dart';
 
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage>
           ),
           SliverToBoxAdapter(child: SizedBox(height: 15)),
           SliverToBoxAdapter(
-            child: CategorySection(
+            child: RouteTypeSection(
               onSeeAll: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoutesPage())),
               routes: [sampleRoute, sampleRoute, sampleRoute],
               title: 'Popular',
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage>
           ),
           SliverToBoxAdapter(child: SizedBox(height: 15)),
           SliverToBoxAdapter(
-            child: CategorySection(
+            child: RouteTypeSection(
               routes: [sampleRoute, sampleRoute, sampleRoute],
               title: 'Recommend',
             ),
