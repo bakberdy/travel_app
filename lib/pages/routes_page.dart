@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/utils/context_extensions.dart';
 import 'package:travel_app/entities/route_entity.dart';
+import 'package:travel_app/types/route_filtering_method.dart';
+import 'package:travel_app/types/route_sorting_method.dart';
+import 'package:travel_app/widgets/filter_chip.dart';
+import 'package:travel_app/widgets/sorting_chip.dart';
 
 class RoutesPage extends StatefulWidget {
   const RoutesPage({super.key, this.type});
@@ -12,17 +17,46 @@ class RoutesPage extends StatefulWidget {
 
 class _RoutesPageState extends State<RoutesPage> {
   final List<RouteEntity> routes = [];
-  SortingMethod sortingMethod = SortingMethod.distanceAscending;
-  FilteringMethod? filteringMethod;
-  
+  RouteSortingMethod sortingMethod = RouteSortingMethod.distanceAscending;
+  List<RouteFilteringMethod>? filteringMethods = [
+    RouteFilteringMethod.byDifficulty(difficulty: .hard),
+    RouteFilteringMethod.byDistanceRange(minKm: 1.3, maxKm: 10.3),
+    RouteFilteringMethod.byType(type: 'Lake'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(20),
-          child: Row(
-            children: [Container(color: Colors.amber, height: 30, width: 100)],
+          preferredSize: Size.fromHeight(30),
+          child: SizedBox(
+            height: 30,
+            child: ListView(
+              padding: .symmetric(horizontal: 16),
+              scrollDirection: .horizontal,
+              children: [
+                SortingChip(sortingMethod: sortingMethod),
+                if (filteringMethods != null &&
+                    filteringMethods!.isNotEmpty) ...[
+                  Center(
+                    child: SizedBox(
+                      height: 25,
+                      child: VerticalDivider(
+                        color: context.colorScheme.outline,
+                        thickness: 2,
+                      ),
+                    ),
+                  ),
+                  ...filteringMethods!.map(
+                    (filter) => Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: FilteringChip(filteringMethod: filter),
+                    ),
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
         centerTitle: true,
@@ -46,50 +80,4 @@ class _RoutesPageState extends State<RoutesPage> {
       ),
     );
   }
-}
-
-enum SortingMethod {
-  distanceAscending,
-  distanceDescending,
-  difficultyAscending,
-  difficultyDescending,
-}
-
-
-sealed class FilteringMethod {
-  const FilteringMethod();
-  
-  factory FilteringMethod.byType({required String type}) => 
-      FilteringMethodByType(type: type);
-  
-  factory FilteringMethod.byDifficulty({required RouteDifficulty difficulty}) => 
-      FilteringMethodByDifficulty(difficulty: difficulty);
-  
-  factory FilteringMethod.byDistanceRange({
-    required double minKm,
-    required double maxKm,
-  }) => FilteringMethodByDistanceRange(minKm: minKm, maxKm: maxKm);
-
-}
-
-class FilteringMethodByType extends FilteringMethod {
-  const FilteringMethodByType({required this.type});
-  
-  final String type;
-}
-
-class FilteringMethodByDifficulty extends FilteringMethod {
-  const FilteringMethodByDifficulty({required this.difficulty});
-  
-  final RouteDifficulty difficulty;
-}
-
-class FilteringMethodByDistanceRange extends FilteringMethod {
-  const FilteringMethodByDistanceRange({
-    required this.minKm,
-    required this.maxKm,
-  });
-  
-  final double minKm;
-  final double maxKm;
 }

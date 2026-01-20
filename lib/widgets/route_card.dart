@@ -1,7 +1,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_app/context_extensions.dart';
+import 'package:travel_app/utils/context_extensions.dart';
 import 'package:travel_app/entities/route_entity.dart';
 import 'package:travel_app/widgets/labeled_icon.dart';
 
