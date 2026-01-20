@@ -10,8 +10,23 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   final _searchController = TextEditingController();
+  late final TabController _categoriesTabbarController;
+  @override
+  void initState() {
+    _categoriesTabbarController = TabController(length: 4, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _categoriesTabbarController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +63,31 @@ class _HomePageState extends State<HomePage> {
                 hintText: 'Find things to do',
                 controller: _searchController,
               ),
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverToBoxAdapter(
+            child: TabBar(
+              padding: .symmetric(horizontal: 16),
+              labelStyle: context.textTheme.labelLarge?.copyWith(
+                color: context.colorScheme.onPrimaryContainer,
+              ),
+              isScrollable: true,
+              dividerHeight: 0,
+              tabAlignment: .start,
+              indicator: BoxDecoration(
+                borderRadius: .circular(16),
+                color: context.colorScheme.primaryContainer,
+              ),
+              indicatorSize: .tab,
+              splashBorderRadius: .circular(16),
+              tabs: [
+                Tab(text: 'Hotels'),
+                Tab(text: 'Food'),
+                Tab(text: 'Adventure'),
+                Tab(text: 'Cities'),
+              ],
+              controller: _categoriesTabbarController,
             ),
           ),
         ],
