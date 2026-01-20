@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_app/context_extensions.dart';
 import 'package:travel_app/entities/route_entity.dart';
@@ -34,9 +35,40 @@ class RouteCard extends StatelessWidget {
           children: [
             SizedBox(
               height: 150,
-              child: Image.network(
-                route.imageUrl,
-                fit: .cover,
+              child: CachedNetworkImage(
+                imageUrl: route.imageUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                placeholder: (context, url) => Container(
+                  color: context.colorScheme.surfaceContainerHighest,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Container(
+                  color: context.colorScheme.errorContainer,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.broken_image_outlined,
+                        size: 48,
+                        color: context.colorScheme.onErrorContainer,
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Image not available',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          color: context.colorScheme.onErrorContainer,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 5),
