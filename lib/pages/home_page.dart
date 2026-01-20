@@ -101,35 +101,50 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           SliverToBoxAdapter(child: SizedBox(height: 15)),
-          SliverPadding(
-            sliver: SliverToBoxAdapter(
-              child: CategoryHeader(
-                title: 'Popular',
-                onSeeAllTapped: () {
-                  debugPrint("Popular see all tapped");
-                },
-              ),
-            ),
-            padding: .symmetric(horizontal: 16),
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: 10)),
           SliverToBoxAdapter(
-            child: SizedBox(
-              height: 280,
-              child: ListView.separated(
-                padding: .symmetric(horizontal: 16),
-                scrollDirection: .horizontal,
-                itemBuilder: (context, index) {
-                  return RouteCard(route: sampleRoute, onPressed: () {});
-                },
-                separatorBuilder: (BuildContext context, int index) =>
-                    SizedBox(width: 10),
-                itemCount: 100,
-              ),
+            child: CategorySection(
+              routes: [sampleRoute, sampleRoute, sampleRoute],
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class CategorySection extends StatelessWidget {
+  const CategorySection({super.key, required this.routes});
+
+  final List<RouteEntity> routes;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: CategoryHeader(
+            title: 'Popular',
+            onSeeAllTapped: () {
+              debugPrint("Popular see all tapped");
+            },
+          ),
+        ),
+        SizedBox(height: 10),
+        SizedBox(
+          height: 280,
+          child: ListView.separated(
+            padding: .symmetric(horizontal: 16),
+            scrollDirection: .horizontal,
+            itemBuilder: (context, index) {
+              return RouteCard(route: routes[index], onPressed: () {});
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                SizedBox(width: 10),
+            itemCount: routes.length,
+          ),
+        ),
+      ],
     );
   }
 }
