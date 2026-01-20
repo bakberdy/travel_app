@@ -42,17 +42,24 @@ class AppTheme {
       titleMedium: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 14,
-        fontWeight: .w500,
+        fontWeight: .w600,
       ), //card titles
       titleSmall: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 12,
-        fontWeight: .w500,
+        fontWeight: .w600,
       ), //card titles
 
       bodyMedium: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 14,
+        height: 1.2
+      ), //the main content style
+
+       bodySmall: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 10,
+        height: 1.2
       ), //the main content style
 
       labelLarge: TextStyle(

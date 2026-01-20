@@ -8,7 +8,9 @@ class RouteEntity extends Equatable {
   final List<LocationEntity> coordinates;
   final String direction; //for example Заилийский Алатау
   final String gorge; // ущелье, например Большое Алматинское Ущелье
-
+  final RouteDifficulty difficulty;
+  final double distanceKm;
+    
   const RouteEntity({
     required this.title,
     required this.location,
@@ -16,7 +18,11 @@ class RouteEntity extends Equatable {
     required this.description,
     required this.direction,
     required this.gorge,
+    required this.difficulty,
+    required this.distanceKm,
   });
   @override
   List<Object?> get props => [title, description, location, coordinates];
 }
+
+enum RouteDifficulty { easy, medium, hard }
