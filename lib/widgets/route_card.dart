@@ -7,16 +7,17 @@ import 'package:travel_app/widgets/labeled_icon.dart';
 class RouteCard extends StatelessWidget {
   const RouteCard({
     super.key,
-    required this.route,
+    required this.route, required this.onPressed,
   });
 
   final RouteEntity route;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: .circular(16),
-      onTap: (){},
+      onTap: onPressed,
       child: Container(
         clipBehavior: .hardEdge,
         width: 170,

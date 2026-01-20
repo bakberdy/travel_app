@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage>
                 padding: .symmetric(horizontal: 16),
                 scrollDirection: .horizontal,
                 itemBuilder: (context, index) {
-                  return RouteCard(route: sampleRoute);
+                  return RouteCard(route: sampleRoute, onPressed: () {});
                 },
                 separatorBuilder: (BuildContext context, int index) =>
                     SizedBox(width: 10),
