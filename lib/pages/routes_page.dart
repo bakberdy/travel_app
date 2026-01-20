@@ -6,6 +6,7 @@ import 'package:travel_app/types/route_sorting_method.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/filter_chip.dart';
 import 'package:travel_app/widgets/horizontal_route_card.dart';
+import 'package:travel_app/widgets/sorting_bottom_sheet.dart';
 import 'package:travel_app/widgets/sorting_chip.dart';
 
 class RoutesPage extends StatefulWidget {
@@ -65,7 +66,17 @@ class _RoutesPageState extends State<RoutesPage> {
             title: Text('Routes'),
             actions: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  SortingBottomSheet.show(
+                    context,
+                    currentSortingMethod: sortingMethod,
+                    onSortingMethodSelected: (method) {
+                      setState(() {
+                        sortingMethod = method;
+                      });
+                    },
+                  );
+                },
                 child: Image.asset('assets/icons/sort.png', height: 22, width: 22),
               ),
               SizedBox(width: 10),
@@ -93,7 +104,7 @@ class _RoutesPageState extends State<RoutesPage> {
                       children: [
                         SortingChip(
                           sortingMethod: sortingMethod,
-                          onTap: () {},
+
                         ),
                         if (filteringMethods != null && filteringMethods!.isNotEmpty) ...[
                           Center(
@@ -110,7 +121,6 @@ class _RoutesPageState extends State<RoutesPage> {
                               padding: const EdgeInsets.only(right: 8),
                               child: FilteringChip(
                                 filteringMethod: filter,
-                                onTap: () {},
                                 onRemoveTap: () {},
                               ),
                             ),
