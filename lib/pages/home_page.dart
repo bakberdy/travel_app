@@ -3,6 +3,7 @@ import 'package:travel_app/context_extensions.dart';
 import 'package:travel_app/entities/location_entity.dart';
 import 'package:travel_app/entities/route_entity.dart';
 import 'package:travel_app/widgets/category_header.dart';
+import 'package:travel_app/widgets/category_section.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/location_button.dart';
 import 'package:travel_app/widgets/route_card.dart';
@@ -104,47 +105,18 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(
             child: CategorySection(
               routes: [sampleRoute, sampleRoute, sampleRoute],
+              title: 'Popular',
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 15)),
+          SliverToBoxAdapter(
+            child: CategorySection(
+              routes: [sampleRoute, sampleRoute, sampleRoute],
+              title: 'Recommend',
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class CategorySection extends StatelessWidget {
-  const CategorySection({super.key, required this.routes});
-
-  final List<RouteEntity> routes;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: CategoryHeader(
-            title: 'Popular',
-            onSeeAllTapped: () {
-              debugPrint("Popular see all tapped");
-            },
-          ),
-        ),
-        SizedBox(height: 10),
-        SizedBox(
-          height: 280,
-          child: ListView.separated(
-            padding: .symmetric(horizontal: 16),
-            scrollDirection: .horizontal,
-            itemBuilder: (context, index) {
-              return RouteCard(route: routes[index], onPressed: () {});
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                SizedBox(width: 10),
-            itemCount: routes.length,
-          ),
-        ),
-      ],
     );
   }
 }
