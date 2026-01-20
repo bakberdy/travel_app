@@ -1,29 +1,51 @@
-
 import 'package:flutter/material.dart';
 import 'package:travel_app/context_extensions.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({
     super.key,
+    this.controller,
+    this.onSubmitted,
+    this.onChanged,
+    this.onClear,
   });
+  final TextEditingController? controller;
+  final void Function(String value)? onSubmitted;
+  final void Function(String value)? onChanged;
+  final VoidCallback? onClear;
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const .symmetric(horizontal: 16),
-        child: TextField(
-          style: context.textTheme.bodyMedium,
-          decoration: InputDecoration(
-            hintText: 'Find things to do',
-            prefixIcon: Icon(Icons.search),
-            fillColor: context.colorScheme.surfaceContainer,
-            filled: true,
-            border: OutlineInputBorder(
-              borderRadius: .circular(16),
-              borderSide: .none
-            )
-          ),
+    return TextField(
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      controller: controller,
+      style: context.textTheme.bodyMedium,
+      decoration: InputDecoration(
+        suffixIcon: controller == null
+            ? null
+            : ValueListenableBuilder(
+                valueListenable: controller!,
+                builder: (context, value, child) {
+                  if (value.text.isEmpty) {
+                    return SizedBox();
+                  }
+                  return IconButton(
+                    onPressed: onClear,
+                    icon: Icon(
+                      Icons.clear,
+                      color: context.colorScheme.onSurface,
+                    ),
+                  );
+                },
+              ),
+        hintText: 'Find things to do',
+        prefixIcon: Icon(Icons.search),
+        fillColor: context.colorScheme.surfaceContainer,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: .circular(16),
+          borderSide: .none,
         ),
       ),
     );

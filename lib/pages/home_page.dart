@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,10 @@ class _HomePageState extends State<HomePage> {
                 alignment: .topCenter,
                 child: Builder(
                   builder: (context) {
-                    return LocationButton(onTap: () {}, text: 'Almaty, Kazakstan',);
+                    return LocationButton(
+                      onTap: () {},
+                      text: 'Almaty, Kazakstan',
+                    );
                   },
                 ),
               ),
@@ -36,8 +40,18 @@ class _HomePageState extends State<HomePage> {
             ),
             centerTitle: false,
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 10,)),
-          CustomSearchBar()
+          SliverToBoxAdapter(child: SizedBox(height: 10)),
+          SliverPadding(
+            padding: .symmetric(horizontal: 16),
+            sliver: SliverToBoxAdapter(
+              child: CustomSearchBar(
+                controller: _searchController,
+                onClear: () {
+                  _searchController.clear();
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
