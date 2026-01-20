@@ -7,7 +7,6 @@ on:
       - dev
       - staging
       - main
-      
 
 jobs:
   build:
