@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:travel_app/types/route_filtering_method.dart';
 import 'package:travel_app/types/route_sorting_method.dart';
@@ -6,15 +5,27 @@ import 'package:travel_app/utils/context_extensions.dart';
 import 'package:travel_app/widgets/filter_chip.dart';
 import 'package:travel_app/widgets/sorting_chip.dart';
 
-class RoutesPageAppBar extends StatelessWidget implements PreferredSizeWidget{
+class RoutesPageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const RoutesPageAppBar({
     super.key,
     required this.sortingMethod,
     required this.filteringMethods,
+    this.onSortTap,
+    this.onFilterTap,
+    this.onSortingChipTap,
+    this.onSortingChipRemove,
+    this.onFilteringChipTap,
+    this.onFilteringChipRemove,
   });
 
   final RouteSortingMethod sortingMethod;
   final List<RouteFilteringMethod>? filteringMethods;
+  final VoidCallback? onSortTap;
+  final VoidCallback? onFilterTap;
+  final VoidCallback? onSortingChipTap;
+  final VoidCallback? onSortingChipRemove;
+  final void Function(RouteFilteringMethod)? onFilteringChipTap;
+  final void Function(RouteFilteringMethod)? onFilteringChipRemove;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +38,12 @@ class RoutesPageAppBar extends StatelessWidget implements PreferredSizeWidget{
             padding: .symmetric(horizontal: 16),
             scrollDirection: .horizontal,
             children: [
-              SortingChip(sortingMethod: sortingMethod),
-              if (filteringMethods != null &&
-                  filteringMethods!.isNotEmpty) ...[
+              SortingChip(
+                sortingMethod: sortingMethod,
+                onTap: onSortingChipTap,
+                onRemoveTap: onSortingChipRemove,
+              ),
+              if (filteringMethods != null && filteringMethods!.isNotEmpty) ...[
                 Center(
                   child: SizedBox(
                     height: 25,
@@ -44,7 +58,8 @@ class RoutesPageAppBar extends StatelessWidget implements PreferredSizeWidget{
                     padding: const EdgeInsets.only(right: 8),
                     child: FilteringChip(
                       filteringMethod: filter,
-                      onRemoveTap: () {},
+                      onTap: () => onFilteringChipTap?.call(filter),
+                      onRemoveTap: () => onFilteringChipRemove?.call(filter),
                     ),
                   ),
                 ),
@@ -57,23 +72,19 @@ class RoutesPageAppBar extends StatelessWidget implements PreferredSizeWidget{
       title: Text('Routes'),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: onSortTap,
           child: Image.asset('assets/icons/sort.png', height: 22, width: 22),
         ),
         SizedBox(width: 10),
         GestureDetector(
-          onTap: () {},
-          child: Image.asset(
-            'assets/icons/filter.png',
-            height: 22,
-            width: 22,
-          ),
+          onTap: onFilterTap,
+          child: Image.asset('assets/icons/filter.png', height: 22, width: 22),
         ),
         SizedBox(width: 10),
       ],
     );
   }
-  
+
   @override
   Size get preferredSize => Size.fromHeight(90);
 }
