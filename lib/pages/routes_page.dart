@@ -8,9 +8,9 @@ import 'package:travel_app/widgets/horizontal_route_card.dart';
 import 'package:travel_app/widgets/sorting_chip.dart';
 
 class RoutesPage extends StatefulWidget {
-  const RoutesPage({super.key, this.type});
+  const RoutesPage({super.key, this.category});
 
-  final String? type;
+  final String? category;
 
   @override
   State<RoutesPage> createState() => _RoutesPageState();
