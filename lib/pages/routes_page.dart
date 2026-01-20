@@ -51,7 +51,10 @@ class _RoutesPageState extends State<RoutesPage> {
                   ...filteringMethods!.map(
                     (filter) => Padding(
                       padding: const EdgeInsets.only(right: 8),
-                      child: FilteringChip(filteringMethod: filter),
+                      child: FilteringChip(
+                        filteringMethod: filter,
+                        onRemoveTap: () {},
+                      ),
                     ),
                   ),
                 ],
