@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:travel_app/context_extensions.dart';
 import 'package:travel_app/entities/location_entity.dart';
 import 'package:travel_app/entities/route_entity.dart';
-import 'package:travel_app/widgets/category_header.dart';
 import 'package:travel_app/widgets/category_section.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/location_button.dart';
-import 'package:travel_app/widgets/route_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
