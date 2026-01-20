@@ -4,6 +4,7 @@ import 'package:travel_app/entities/location_entity.dart';
 import 'package:travel_app/entities/route_entity.dart';
 import 'package:travel_app/widgets/category_header.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
+import 'package:travel_app/widgets/labeled_icon.dart';
 import 'package:travel_app/widgets/location_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -113,75 +114,95 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(child: SizedBox(height: 10)),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 270,
+              height: 280,
               child: ListView.separated(
                 padding: .symmetric(horizontal: 16),
                 scrollDirection: .horizontal,
                 itemBuilder: (context, index) {
-                  return Container(
-                    clipBehavior: .hardEdge,
-                    width: 160,
-                    height: 270,
-                    decoration: BoxDecoration(
-                      borderRadius: .circular(16),
-                      border: BoxBorder.all(
-                        width: 1,
-                        color: context.colorScheme.outline,
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        Placeholder(fallbackHeight: 150),
-                        SizedBox(height: 5),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Column(
-                            crossAxisAlignment: .start,
-                            children: [
-                              Text(
-                                sampleRoute.title,
-                                style: context.textTheme.titleMedium,
-                              ),
-                              Container(
-                                padding: .symmetric(vertical: 2, horizontal: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: .circular(8),
-                                  color: Colors.amber,
-                                ),
-                                child: Text(
-                                  'medium',
-                                  overflow: .ellipsis,
-                                  style: context.textTheme.labelSmall,
-                                ),
-                              ),
-                              SizedBox(height: 3),
-                              Row(
-                                children: [
-                                  Icon(Icons.location_on_outlined, size: 15),
-                                  SizedBox(width: 5,),
-                                  Flexible(
-                                    child: Text(
-                                      maxLines: 2,
-                                      sampleRoute.location?.name ??
-                                          sampleRoute.gorge,
-                                      style: context.textTheme.bodySmall,
-                                      overflow: .ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                  return RouteCard(route: sampleRoute);
                 },
                 separatorBuilder: (BuildContext context, int index) =>
                     SizedBox(width: 10),
                 itemCount: 100,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class RouteCard extends StatelessWidget {
+  const RouteCard({
+    super.key,
+    required this.route,
+  });
+
+  final RouteEntity route;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      clipBehavior: .hardEdge,
+      width: 170,
+      height: 280,
+      decoration: BoxDecoration(
+        borderRadius: .circular(16),
+        border: BoxBorder.all(
+          width: 1,
+          color: context.colorScheme.outline,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: .start,
+        children: [
+          SizedBox(
+            height: 150,
+            child: Image.network(
+              'https://morena.kz/foto/allfoto/ver%20mau/ver%20mau%20(3).jpg',
+              fit: .cover,
+            ),
+          ),
+          SizedBox(height: 5),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                Text(
+                  route.title,
+                  style: context.textTheme.titleMedium,
+                ),
+                SizedBox(height: 5),
+    
+                Container(
+                  padding: .symmetric(vertical: 2, horizontal: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: .circular(8),
+                    color: Colors.amber,
+                  ),
+                  child: Text(
+                    'medium',
+                    overflow: .ellipsis,
+                    style: context.textTheme.labelSmall,
+                  ),
+                ),
+                SizedBox(height: 3),
+                LabeledIcon(
+                  label:
+                      route.location?.name ??
+                      route.gorge,
+                  icon: Image.asset(
+                    'assets/icons/location_point.png',
+                  ),
+                ),
+                SizedBox(height: 5),
+                LabeledIcon(
+                  label: '${route.distanceKm} km',
+                  icon: Image.asset('assets/icons/route.png'),
+                ),
+              ],
             ),
           ),
         ],
