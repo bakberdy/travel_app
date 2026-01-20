@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/context_extensions.dart';
+import 'package:travel_app/widgets/category_header.dart';
 import 'package:travel_app/widgets/custom_search_bar.dart';
 import 'package:travel_app/widgets/location_button.dart';
 
@@ -36,14 +37,7 @@ class _HomePageState extends State<HomePage>
             actions: [
               Align(
                 alignment: .topCenter,
-                child: Builder(
-                  builder: (context) {
-                    return LocationButton(
-                      onTap: () {},
-                      text: 'Almaty, Kazakstan',
-                    );
-                  },
-                ),
+                child: LocationButton(onTap: () {}, text: 'Almaty, Kazakstan'),
               ),
             ],
             title: Column(
@@ -82,12 +76,49 @@ class _HomePageState extends State<HomePage>
               indicatorSize: .tab,
               splashBorderRadius: .circular(16),
               tabs: [
-                Tab(text: 'Hotels'),
-                Tab(text: 'Food'),
-                Tab(text: 'Adventure'),
-                Tab(text: 'Cities'),
+                Tab(text: 'Peak'),
+                Tab(text: 'Waterfall'),
+                Tab(text: 'Lake'),
+                Tab(text: 'Route'),
               ],
               controller: _categoriesTabbarController,
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 15)),
+          SliverPadding(
+            sliver: SliverToBoxAdapter(
+              child: CategoryHeader(
+                title: 'Popular',
+                onSeeAllTapped: () {
+                  debugPrint("Popular see all tapped");
+                },
+              ),
+            ),
+            padding: .symmetric(horizontal: 16),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 250,
+              child: ListView.separated(
+                padding: .symmetric(horizontal: 16),
+                scrollDirection: .horizontal,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 160,
+                    height: 250,
+                    decoration: BoxDecoration(
+                      borderRadius: .circular(16),
+                      border: BoxBorder.all(
+                        width: 1,
+                        color: context.colorScheme.outline,
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    SizedBox(width: 10),
+                itemCount: 100,
+              ),
             ),
           ),
         ],

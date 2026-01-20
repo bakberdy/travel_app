@@ -20,6 +20,7 @@ class AppTheme {
       onError: Colors.white,
       surface: Colors.white,
       onSurface: Colors.black,
+      outline: Color(0xffE0E5EB)
     ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
