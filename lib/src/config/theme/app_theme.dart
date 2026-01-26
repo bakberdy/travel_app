@@ -26,6 +26,19 @@ class AppTheme {
       onSurface: AppColors.lightOnSurface,
       outline: AppColors.lightOutline
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: AppColors.lightSurface,
+          enableFeedback: false,
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+          selectedIconTheme: IconThemeData(color: AppColors.lightPrimary),
+          unselectedIconTheme: IconThemeData(color: AppColors.lightOnSecondary),
+          selectedLabelStyle: TextStyle(
+            color: AppColors.lightPrimary,
+            fontWeight: FontWeight.w600,
+          ),
+          unselectedLabelStyle: TextStyle(color: AppColors.lightOnSurface),
+        ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
         fontFamily: 'Hiatus',

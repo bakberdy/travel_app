@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:travel_app/src/config/router/app_router.dart';
 import 'package:travel_app/src/features/navigation/providers/scroll_to_top_provider.dart';
 import 'package:travel_app/src/features/navigation/widgets/bottom_navigation_bar_widget.dart';
+import 'package:travel_app/src/features/navigation/widgets/nav_bar.dart';
+import 'package:travel_app/src/features/navigation/widgets/nav_bar_item.dart';
 
 @RoutePage()
 class MainNavigationPage extends StatefulWidget {
@@ -36,17 +38,21 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
           HomeRoute(),
           OnboardingRoute(),
         ],
-        bottomNavigationBuilder: (context, tabsRouter) =>
-            BottomNavigationBarWidget(
-              selectedIndex: tabsRouter.activeIndex,
-              onSetIndex: (index) {
-                if (index != tabsRouter.activeIndex) {
-                  tabsRouter.setActiveIndex(index);
-                } else {
-                  _triggerScrollToTop();
-                }
-              },
-            ),
+        bottomNavigationBuilder: (context, tabsRouter) => NavBar(
+          
+          initialPage: tabsRouter.activeIndex,
+          onPageChanged: (int value) {
+            if (value != tabsRouter.activeIndex) {
+              tabsRouter.setActiveIndex(value);
+            } else {
+              _triggerScrollToTop();
+            }
+          },
+          items: [
+            NavBarItem(icon: const Icon(Icons.home), label: 'Home'),
+            NavBarItem(icon: const Icon(Icons.person), label: 'Profile'),
+          ],
+        ),
       ),
     );
   }
