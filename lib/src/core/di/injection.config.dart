@@ -9,12 +9,17 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'package:travel_app/src/config/router/app_router.dart' as _i433;
 import 'package:travel_app/src/core/api/api_client.dart' as _i401;
 import 'package:travel_app/src/core/di/app_module.dart' as _i691;
+import 'package:travel_app/src/core/monitoring/observers/analytics_page_observer.dart'
+    as _i1002;
+import 'package:travel_app/src/core/monitoring/observers/logger_page_observer.dart'
+    as _i908;
 import 'package:travel_app/src/core/storage/local_storage/local_storage.dart'
     as _i486;
 import 'package:travel_app/src/core/storage/local_storage/shared_preferences_storage.dart'
@@ -37,8 +42,15 @@ extension GetItInjectableX on _i174.GetIt {
       () => appModule.sharedPreferences,
       preResolve: true,
     );
+    gh.lazySingleton<_i558.FlutterSecureStorage>(() => appModule.secureStorage);
+    gh.lazySingleton<_i1002.AnalyticsPageObserver>(
+      () => _i1002.AnalyticsPageObserver(),
+    );
+    gh.lazySingleton<_i908.LoggerPageObserver>(
+      () => _i908.LoggerPageObserver(),
+    );
     gh.lazySingleton<_i412.SecureStorage>(
-      () => _i349.FlutterSecureStorageImpl(),
+      () => _i349.FlutterSecureStorageImpl(gh<_i558.FlutterSecureStorage>()),
     );
     gh.lazySingleton<_i486.LocalStorage>(
       () => _i968.SharedPreferencesStorage(

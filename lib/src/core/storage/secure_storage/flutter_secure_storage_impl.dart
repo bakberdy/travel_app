@@ -7,12 +7,7 @@ import 'secure_storage.dart';
 class FlutterSecureStorageImpl implements SecureStorage {
   final FlutterSecureStorage _storage;
 
-  FlutterSecureStorageImpl()
-      : _storage = const FlutterSecureStorage(
-              iOptions: IOSOptions(
-                accessibility: KeychainAccessibility.first_unlock,
-              ),
-            );
+  FlutterSecureStorageImpl(this._storage);
 
   @override
   Future<void> write({required String key, required String value}) async {
