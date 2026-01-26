@@ -16,14 +16,26 @@ class RouteTypeBloc extends Bloc<RouteTypeEvent, RouteTypeState> {
   final GetRouteTypesUsecase _getRouteTypesUsecase;
   RouteTypeBloc(this._getRouteTypesUsecase) : super(RouteTypeState()) {
     on<GetRouteTypesEvent>((event, emit) async {
+      // Emit loading state
+      emit(state.copyWith(
+        routeTypesStatus: StateStatus.loading,
+        routeTypeErrorMessage: null,
+      ));
+
       final result = await _getRouteTypesUsecase(NoParams());
 
       result.fold(
         (Failure failure) {
-          emit(state.copyWith(routeTypeErrorMessage: failure.message));
+          emit(state.copyWith(
+            routeTypesStatus: StateStatus.error,
+            routeTypeErrorMessage: failure.message,
+          ));
         },
         (routeTypes) {
-          emit(state.copyWith(routeTypes: routeTypes));
+          emit(state.copyWith(
+            routeTypes: routeTypes,
+            routeTypesStatus: StateStatus.success,
+          ));
         },
       );
     });

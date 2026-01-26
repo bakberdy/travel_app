@@ -1,40 +1,72 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_app/src/config/router/app_router.dart';
+import 'package:travel_app/src/core/bloc/state_status.dart';
+import 'package:travel_app/src/core/di/injection.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
+import 'package:travel_app/src/core/utils/extensions/string_extensions.dart';
+import 'package:travel_app/src/features/routes/presentation/blocs/route_types/route_type_bloc.dart';
 import '../../domain/entities/location_entity.dart';
 import '../../domain/entities/route_entity.dart';
-import '../../domain/entities/route_type_entity.dart' as route_type;
+import '../../domain/entities/route_type_entity.dart';
 import '../widgets/category_section.dart';
 import '../widgets/custom_search_bar.dart';
 import '../widgets/location_button.dart';
 
 @RoutePage()
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => sl<RouteTypeBloc>(),
+      child: HomePageContent(),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class HomePageContent extends StatefulWidget {
+  const HomePageContent({super.key});
+
+  @override
+  State<HomePageContent> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePageContent>
+    with TickerProviderStateMixin {
   final _searchController = TextEditingController();
-  late final TabController _categoriesTabbarController;
+  TabController? _categoriesTabbarController;
+  late final RouteTypeBloc routeTypeBloc;
+
   @override
   void initState() {
-    _categoriesTabbarController = TabController(
-      length: route_type.RouteTypeEntity.values.length+1,
-      vsync: this,
-    );
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      routeTypeBloc = context.read<RouteTypeBloc>();
+      // Trigger initial data load
+      routeTypeBloc.add(GetRouteTypesEvent());
+    });
   }
 
   @override
   void dispose() {
-    _categoriesTabbarController.dispose();
+    _categoriesTabbarController?.dispose();
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<void> onRefresh() async {
+    // Trigger data refresh
+    routeTypeBloc.add(GetRouteTypesEvent());
+    
+    // Wait for the state to complete (success or failure)
+    await routeTypeBloc.stream.firstWhere(
+      (state) => state.routeTypesStatus == StateStatus.success ||
+                 state.routeTypesStatus == StateStatus.error,
+    );
   }
 
   final sampleRoute = RouteEntity(
@@ -47,7 +79,8 @@ class _HomePageState extends State<HomePage>
     gorge: 'Малое Алматинское ущелье (МАУ)',
     difficulty: .medium,
     distanceKm: 10.5,
-    imageUrl: 'https://morena.kz/foto/allfoto/ver%20mau/ver%20mau%20(3).jpg', type: route_type.RouteTypeEntity.lake,
+    imageUrl: 'https://morena.kz/foto/allfoto/ver%20mau/ver%20mau%20(3).jpg',
+    type: RouteTypeEntity.lake,
   );
 
   @override
@@ -81,29 +114,67 @@ class _HomePageState extends State<HomePage>
               ),
             ),
           ),
+          CupertinoSliverRefreshControl(onRefresh: onRefresh),
           SliverToBoxAdapter(child: SizedBox(height: 10)),
-          SliverToBoxAdapter(
-            child: TabBar(
-              padding: .symmetric(horizontal: 16),
-              labelStyle: context.textTheme.labelLarge?.copyWith(
-                color: context.colorScheme.onPrimaryContainer,
-              ),
-              isScrollable: true,
-              dividerHeight: 0,
-              tabAlignment: .start,
-              indicator: BoxDecoration(
-                borderRadius: .circular(16),
-                color: context.colorScheme.primaryContainer,
-              ),
-              indicatorSize: .tab,
-              splashBorderRadius: .circular(16),
-              tabs: [Tab(text: 'All'),...route_type.RouteTypeEntity.values.map((type) {
-                final name =
-                    type.name[0].toUpperCase() + type.name.substring(1);
-                return Tab(text: name);
-              })],
-              controller: _categoriesTabbarController,
-            ),
+          BlocConsumer<RouteTypeBloc, RouteTypeState>(
+            listener: (context, state) {
+              // Initialize TabController when route types are loaded
+              if (state.routeTypes != null && 
+                  state.routeTypesStatus == StateStatus.success &&
+                  _categoriesTabbarController == null) {
+                _categoriesTabbarController = TabController(
+                  length: state.routeTypes!.length + 1,
+                  vsync: this,
+                );
+              }
+            },
+            builder: (context, state) {
+              // Show error state
+              if (state.routeTypesStatus == StateStatus.error) {
+                return SliverToBoxAdapter(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        state.routeTypeErrorMessage ?? 'Failed to load categories',
+                        style: TextStyle(color: context.colorScheme.error),
+                      ),
+                    ),
+                  ),
+                );
+              }
+              
+              // Show TabBar when data is available
+              if (_categoriesTabbarController != null &&
+                  state.routeTypes != null) {
+                return SliverToBoxAdapter(
+                  child: TabBar(
+                    padding: .symmetric(horizontal: 16),
+                    labelStyle: context.textTheme.labelLarge?.copyWith(
+                      color: context.colorScheme.onPrimaryContainer,
+                    ),
+                    isScrollable: true,
+                    dividerHeight: 0,
+                    tabAlignment: .start,
+                    indicator: BoxDecoration(
+                      borderRadius: .circular(16),
+                      color: context.colorScheme.primaryContainer,
+                    ),
+                    indicatorSize: .tab,
+                    splashBorderRadius: .circular(16),
+                    tabs: [
+                      Tab(text: 'All'),
+                      ...state.routeTypes
+                              ?.map((type) => Tab(text: type.name.capitalize()))
+                              .toList() ??
+                          [],
+                    ],
+                    controller: _categoriesTabbarController,
+                  ),
+                );
+              }
+              return SliverToBoxAdapter(child: SizedBox());
+            },
           ),
           SliverToBoxAdapter(child: SizedBox(height: 15)),
           SliverToBoxAdapter(
