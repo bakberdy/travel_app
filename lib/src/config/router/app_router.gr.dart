@@ -61,12 +61,20 @@ class OnboardingRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [RoutesPage]
 class RoutesRoute extends PageRouteInfo<RoutesRouteArgs> {
-  RoutesRoute({Key? key, String? category, List<PageRouteInfo>? children})
-    : super(
-        RoutesRoute.name,
-        args: RoutesRouteArgs(key: key, category: category),
-        initialChildren: children,
-      );
+  RoutesRoute({
+    Key? key,
+    RouteCategoryEntity? category,
+    RouteTypeEntity? routeType,
+    List<PageRouteInfo>? children,
+  }) : super(
+         RoutesRoute.name,
+         args: RoutesRouteArgs(
+           key: key,
+           category: category,
+           routeType: routeType,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'RoutesRoute';
 
@@ -76,30 +84,38 @@ class RoutesRoute extends PageRouteInfo<RoutesRouteArgs> {
       final args = data.argsAs<RoutesRouteArgs>(
         orElse: () => const RoutesRouteArgs(),
       );
-      return RoutesPage(key: args.key, category: args.category);
+      return RoutesPage(
+        key: args.key,
+        category: args.category,
+        routeType: args.routeType,
+      );
     },
   );
 }
 
 class RoutesRouteArgs {
-  const RoutesRouteArgs({this.key, this.category});
+  const RoutesRouteArgs({this.key, this.category, this.routeType});
 
   final Key? key;
 
-  final String? category;
+  final RouteCategoryEntity? category;
+
+  final RouteTypeEntity? routeType;
 
   @override
   String toString() {
-    return 'RoutesRouteArgs{key: $key, category: $category}';
+    return 'RoutesRouteArgs{key: $key, category: $category, routeType: $routeType}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! RoutesRouteArgs) return false;
-    return key == other.key && category == other.category;
+    return key == other.key &&
+        category == other.category &&
+        routeType == other.routeType;
   }
 
   @override
-  int get hashCode => key.hashCode ^ category.hashCode;
+  int get hashCode => key.hashCode ^ category.hashCode ^ routeType.hashCode;
 }

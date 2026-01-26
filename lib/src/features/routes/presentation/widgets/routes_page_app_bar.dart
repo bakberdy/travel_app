@@ -18,7 +18,7 @@ class RoutesPageAppBar extends StatefulWidget {
     required this.searchQuery,
   });
 
-  final RouteSortingMethodEntity? sortingMethod;
+  final RouteSortingMethodEntity sortingMethod;
   final List<RouteFilteringMethod>? filteringMethods;
   final String searchQuery;
 
@@ -56,8 +56,7 @@ class _AppBarState extends State<RoutesPageAppBar> {
             SortingBottomSheet.show(
               context,
               currentSortingMethod:
-                  widget.sortingMethod ??
-                  RouteSortingMethodEntity.distanceAscending,
+                  widget.sortingMethod,
               onSortingMethodSelected: (method) {
                 bloc.add(RoutesEvent.updateSorting(sortingMethod: method));
               },

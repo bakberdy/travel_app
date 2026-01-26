@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePageContent>
           SliverToBoxAdapter(
             child: CategorySection(
               onSeeAll: () =>
-                  context.pushRoute(RoutesRoute(category: 'Popular')),
+                  context.pushRoute(RoutesRoute(category: .popular)),
               routes: [sampleRoute, sampleRoute, sampleRoute],
               title: 'Popular',
             ),

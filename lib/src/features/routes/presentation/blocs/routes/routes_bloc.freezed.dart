@@ -537,7 +537,7 @@ as String,
 /// @nodoc
 mixin _$RoutesState {
 
- List<RouteEntity> get routes; StateStatus get routesStatus; String? get routesErrorMessage; RouteSortingMethodEntity? get sortingMethod; List<RouteFilteringMethod>? get filteringMethods; String get searchQuery;
+ List<RouteEntity> get routes; StateStatus get routesStatus; String? get routesErrorMessage; RouteSortingMethodEntity get sortingMethod; List<RouteFilteringMethod>? get filteringMethods; String get searchQuery;
 /// Create a copy of RoutesState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -568,7 +568,7 @@ abstract mixin class $RoutesStateCopyWith<$Res>  {
   factory $RoutesStateCopyWith(RoutesState value, $Res Function(RoutesState) _then) = _$RoutesStateCopyWithImpl;
 @useResult
 $Res call({
- List<RouteEntity> routes, StateStatus routesStatus, String? routesErrorMessage, RouteSortingMethodEntity? sortingMethod, List<RouteFilteringMethod>? filteringMethods, String searchQuery
+ List<RouteEntity> routes, StateStatus routesStatus, String? routesErrorMessage, RouteSortingMethodEntity sortingMethod, List<RouteFilteringMethod>? filteringMethods, String searchQuery
 });
 
 
@@ -585,13 +585,13 @@ class _$RoutesStateCopyWithImpl<$Res>
 
 /// Create a copy of RoutesState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? routes = null,Object? routesStatus = null,Object? routesErrorMessage = freezed,Object? sortingMethod = freezed,Object? filteringMethods = freezed,Object? searchQuery = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? routes = null,Object? routesStatus = null,Object? routesErrorMessage = freezed,Object? sortingMethod = null,Object? filteringMethods = freezed,Object? searchQuery = null,}) {
   return _then(_self.copyWith(
 routes: null == routes ? _self.routes : routes // ignore: cast_nullable_to_non_nullable
 as List<RouteEntity>,routesStatus: null == routesStatus ? _self.routesStatus : routesStatus // ignore: cast_nullable_to_non_nullable
 as StateStatus,routesErrorMessage: freezed == routesErrorMessage ? _self.routesErrorMessage : routesErrorMessage // ignore: cast_nullable_to_non_nullable
-as String?,sortingMethod: freezed == sortingMethod ? _self.sortingMethod : sortingMethod // ignore: cast_nullable_to_non_nullable
-as RouteSortingMethodEntity?,filteringMethods: freezed == filteringMethods ? _self.filteringMethods : filteringMethods // ignore: cast_nullable_to_non_nullable
+as String?,sortingMethod: null == sortingMethod ? _self.sortingMethod : sortingMethod // ignore: cast_nullable_to_non_nullable
+as RouteSortingMethodEntity,filteringMethods: freezed == filteringMethods ? _self.filteringMethods : filteringMethods // ignore: cast_nullable_to_non_nullable
 as List<RouteFilteringMethod>?,searchQuery: null == searchQuery ? _self.searchQuery : searchQuery // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -675,7 +675,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<RouteEntity> routes,  StateStatus routesStatus,  String? routesErrorMessage,  RouteSortingMethodEntity? sortingMethod,  List<RouteFilteringMethod>? filteringMethods,  String searchQuery)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<RouteEntity> routes,  StateStatus routesStatus,  String? routesErrorMessage,  RouteSortingMethodEntity sortingMethod,  List<RouteFilteringMethod>? filteringMethods,  String searchQuery)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RoutesState() when $default != null:
 return $default(_that.routes,_that.routesStatus,_that.routesErrorMessage,_that.sortingMethod,_that.filteringMethods,_that.searchQuery);case _:
@@ -696,7 +696,7 @@ return $default(_that.routes,_that.routesStatus,_that.routesErrorMessage,_that.s
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<RouteEntity> routes,  StateStatus routesStatus,  String? routesErrorMessage,  RouteSortingMethodEntity? sortingMethod,  List<RouteFilteringMethod>? filteringMethods,  String searchQuery)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<RouteEntity> routes,  StateStatus routesStatus,  String? routesErrorMessage,  RouteSortingMethodEntity sortingMethod,  List<RouteFilteringMethod>? filteringMethods,  String searchQuery)  $default,) {final _that = this;
 switch (_that) {
 case _RoutesState():
 return $default(_that.routes,_that.routesStatus,_that.routesErrorMessage,_that.sortingMethod,_that.filteringMethods,_that.searchQuery);}
@@ -713,7 +713,7 @@ return $default(_that.routes,_that.routesStatus,_that.routesErrorMessage,_that.s
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<RouteEntity> routes,  StateStatus routesStatus,  String? routesErrorMessage,  RouteSortingMethodEntity? sortingMethod,  List<RouteFilteringMethod>? filteringMethods,  String searchQuery)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<RouteEntity> routes,  StateStatus routesStatus,  String? routesErrorMessage,  RouteSortingMethodEntity sortingMethod,  List<RouteFilteringMethod>? filteringMethods,  String searchQuery)?  $default,) {final _that = this;
 switch (_that) {
 case _RoutesState() when $default != null:
 return $default(_that.routes,_that.routesStatus,_that.routesErrorMessage,_that.sortingMethod,_that.filteringMethods,_that.searchQuery);case _:
@@ -728,7 +728,7 @@ return $default(_that.routes,_that.routesStatus,_that.routesErrorMessage,_that.s
 
 
 class _RoutesState implements RoutesState {
-  const _RoutesState({final  List<RouteEntity> routes = const [], this.routesStatus = StateStatus.initial, this.routesErrorMessage, this.sortingMethod, final  List<RouteFilteringMethod>? filteringMethods, this.searchQuery = ''}): _routes = routes,_filteringMethods = filteringMethods;
+  const _RoutesState({final  List<RouteEntity> routes = const [], this.routesStatus = StateStatus.initial, this.routesErrorMessage, this.sortingMethod = RouteSortingMethodEntity.distanceAscending, final  List<RouteFilteringMethod>? filteringMethods, this.searchQuery = ''}): _routes = routes,_filteringMethods = filteringMethods;
   
 
  final  List<RouteEntity> _routes;
@@ -740,7 +740,7 @@ class _RoutesState implements RoutesState {
 
 @override@JsonKey() final  StateStatus routesStatus;
 @override final  String? routesErrorMessage;
-@override final  RouteSortingMethodEntity? sortingMethod;
+@override@JsonKey() final  RouteSortingMethodEntity sortingMethod;
  final  List<RouteFilteringMethod>? _filteringMethods;
 @override List<RouteFilteringMethod>? get filteringMethods {
   final value = _filteringMethods;
@@ -782,7 +782,7 @@ abstract mixin class _$RoutesStateCopyWith<$Res> implements $RoutesStateCopyWith
   factory _$RoutesStateCopyWith(_RoutesState value, $Res Function(_RoutesState) _then) = __$RoutesStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<RouteEntity> routes, StateStatus routesStatus, String? routesErrorMessage, RouteSortingMethodEntity? sortingMethod, List<RouteFilteringMethod>? filteringMethods, String searchQuery
+ List<RouteEntity> routes, StateStatus routesStatus, String? routesErrorMessage, RouteSortingMethodEntity sortingMethod, List<RouteFilteringMethod>? filteringMethods, String searchQuery
 });
 
 
@@ -799,13 +799,13 @@ class __$RoutesStateCopyWithImpl<$Res>
 
 /// Create a copy of RoutesState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? routes = null,Object? routesStatus = null,Object? routesErrorMessage = freezed,Object? sortingMethod = freezed,Object? filteringMethods = freezed,Object? searchQuery = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? routes = null,Object? routesStatus = null,Object? routesErrorMessage = freezed,Object? sortingMethod = null,Object? filteringMethods = freezed,Object? searchQuery = null,}) {
   return _then(_RoutesState(
 routes: null == routes ? _self._routes : routes // ignore: cast_nullable_to_non_nullable
 as List<RouteEntity>,routesStatus: null == routesStatus ? _self.routesStatus : routesStatus // ignore: cast_nullable_to_non_nullable
 as StateStatus,routesErrorMessage: freezed == routesErrorMessage ? _self.routesErrorMessage : routesErrorMessage // ignore: cast_nullable_to_non_nullable
-as String?,sortingMethod: freezed == sortingMethod ? _self.sortingMethod : sortingMethod // ignore: cast_nullable_to_non_nullable
-as RouteSortingMethodEntity?,filteringMethods: freezed == filteringMethods ? _self._filteringMethods : filteringMethods // ignore: cast_nullable_to_non_nullable
+as String?,sortingMethod: null == sortingMethod ? _self.sortingMethod : sortingMethod // ignore: cast_nullable_to_non_nullable
+as RouteSortingMethodEntity,filteringMethods: freezed == filteringMethods ? _self._filteringMethods : filteringMethods // ignore: cast_nullable_to_non_nullable
 as List<RouteFilteringMethod>?,searchQuery: null == searchQuery ? _self.searchQuery : searchQuery // ignore: cast_nullable_to_non_nullable
 as String,
   ));
