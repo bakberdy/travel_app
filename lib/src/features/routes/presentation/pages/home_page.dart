@@ -4,7 +4,6 @@ import 'package:travel_app/src/config/router/app_router.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 import '../../domain/entities/location_entity.dart';
 import '../../domain/entities/route_entity.dart';
-import 'routes_page.dart';
 import '../types/route_type.dart' as route_type;
 import '../widgets/category_section.dart';
 import '../widgets/custom_search_bar.dart';
@@ -24,7 +23,10 @@ class _HomePageState extends State<HomePage>
   late final TabController _categoriesTabbarController;
   @override
   void initState() {
-    _categoriesTabbarController = TabController(length: route_type.RouteType.values.length, vsync: this);
+    _categoriesTabbarController = TabController(
+      length: route_type.RouteType.values.length,
+      vsync: this,
+    );
     super.initState();
   }
 
@@ -68,18 +70,18 @@ class _HomePageState extends State<HomePage>
               ],
             ),
             centerTitle: false,
-          ),
-          SliverToBoxAdapter(child: SizedBox(height: 10)),
-          SliverPadding(
-            padding: .symmetric(horizontal: 16),
-            sliver: SliverToBoxAdapter(
-              child: CustomSearchBar(
-                hintText: 'Find things to do',
-                controller: _searchController,
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(60),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CustomSearchBar(
+                  hintText: 'Find things to do',
+                  controller: _searchController,
+                ),
               ),
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverToBoxAdapter(child: SizedBox(height: 10)),
           SliverToBoxAdapter(
             child: TabBar(
               padding: .symmetric(horizontal: 16),
@@ -96,7 +98,8 @@ class _HomePageState extends State<HomePage>
               indicatorSize: .tab,
               splashBorderRadius: .circular(16),
               tabs: route_type.RouteType.values.map((type) {
-                final name = type.name[0].toUpperCase() + type.name.substring(1);
+                final name =
+                    type.name[0].toUpperCase() + type.name.substring(1);
                 return Tab(text: name);
               }).toList(),
               controller: _categoriesTabbarController,
@@ -105,7 +108,8 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(child: SizedBox(height: 15)),
           SliverToBoxAdapter(
             child: CategorySection(
-              onSeeAll: () => context.pushRoute(RoutesRoute(category: 'Popular')),
+              onSeeAll: () =>
+                  context.pushRoute(RoutesRoute(category: 'Popular')),
               routes: [sampleRoute, sampleRoute, sampleRoute],
               title: 'Popular',
             ),
@@ -117,6 +121,7 @@ class _HomePageState extends State<HomePage>
               title: 'Recommend',
             ),
           ),
+          SliverToBoxAdapter(child: SizedBox(height: 120)),
         ],
       ),
     );
