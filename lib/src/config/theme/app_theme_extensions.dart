@@ -1,67 +1,42 @@
 import 'package:flutter/material.dart';
 
-class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
-  final Color success;
-  final Color warning;
-  final Color info;
-  final Color mutedForeground;
-  final Color surfaceMuted;
-  final Color cardStroke;
-  final Color accentGlow;
 
-  const AppThemeExtension({
-    required this.success,
-    required this.warning,
-    required this.info,
-    required this.mutedForeground,
-    required this.surfaceMuted,
-    required this.cardStroke,
-    required this.accentGlow,
+class DifficultyColors extends ThemeExtension<DifficultyColors> {
+  final Color easy;
+  final Color medium;
+  final Color hard;
+
+  const DifficultyColors({
+    required this.easy,
+    required this.medium,
+    required this.hard,
   });
 
   @override
-  ThemeExtension<AppThemeExtension> copyWith({
-    Color? success,
-    Color? warning,
-    Color? info,
-    Color? mutedForeground,
-    Color? surfaceMuted,
-    Color? cardStroke,
-    Color? accentGlow,
+  ThemeExtension<DifficultyColors> copyWith({
+    Color? easy,
+    Color? medium,
+    Color? hard,
   }) {
-    return AppThemeExtension(
-      success: success ?? this.success,
-      warning: warning ?? this.warning,
-      info: info ?? this.info,
-      mutedForeground: mutedForeground ?? this.mutedForeground,
-      surfaceMuted: surfaceMuted ?? this.surfaceMuted,
-      cardStroke: cardStroke ?? this.cardStroke,
-      accentGlow: accentGlow ?? this.accentGlow,
+    return DifficultyColors(
+      easy: easy ?? this.easy,
+      medium: medium ?? this.medium,
+      hard: hard ?? this.hard,
     );
   }
 
   @override
-  ThemeExtension<AppThemeExtension> lerp(
-    ThemeExtension<AppThemeExtension>? other,
+  ThemeExtension<DifficultyColors> lerp(
+    ThemeExtension<DifficultyColors>? other,
     double t,
   ) {
-    if (other is! AppThemeExtension) {
+    if (other is! DifficultyColors) {
       return this;
     }
-    return AppThemeExtension(
-      success: Color.lerp(success, other.success, t)!,
-      warning: Color.lerp(warning, other.warning, t)!,
-      info: Color.lerp(info, other.info, t)!,
-      mutedForeground: Color.lerp(mutedForeground, other.mutedForeground, t)!,
-      surfaceMuted: Color.lerp(surfaceMuted, other.surfaceMuted, t)!,
-      cardStroke: Color.lerp(cardStroke, other.cardStroke, t)!,
-      accentGlow: Color.lerp(accentGlow, other.accentGlow, t)!,
+    return DifficultyColors(
+      easy: Color.lerp(easy, other.easy, t)!,
+      medium: Color.lerp(medium, other.medium, t)!,
+      hard: Color.lerp(hard, other.hard, t)!,
     );
-  }
-}
-
-extension AppThemeExtensionGetter on BuildContext {
-  AppThemeExtension get appTheme {
-    return Theme.of(this).extension<AppThemeExtension>()!;
   }
 }

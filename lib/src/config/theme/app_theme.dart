@@ -1,93 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/src/config/theme/app_colors.dart';
+import 'package:travel_app/src/config/theme/app_theme_extensions.dart';
 
-class DifficultyColors extends ThemeExtension<DifficultyColors> {
-  final Color easy;
-  final Color medium;
-  final Color hard;
 
-  const DifficultyColors({
-    required this.easy,
-    required this.medium,
-    required this.hard,
-  });
-
-  @override
-  ThemeExtension<DifficultyColors> copyWith({
-    Color? easy,
-    Color? medium,
-    Color? hard,
-  }) {
-    return DifficultyColors(
-      easy: easy ?? this.easy,
-      medium: medium ?? this.medium,
-      hard: hard ?? this.hard,
-    );
-  }
-
-  @override
-  ThemeExtension<DifficultyColors> lerp(
-    ThemeExtension<DifficultyColors>? other,
-    double t,
-  ) {
-    if (other is! DifficultyColors) {
-      return this;
-    }
-    return DifficultyColors(
-      easy: Color.lerp(easy, other.easy, t)!,
-      medium: Color.lerp(medium, other.medium, t)!,
-      hard: Color.lerp(hard, other.hard, t)!,
-    );
-  }
-}
 
 class AppTheme {
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.lightSurface,
     appBarTheme: AppBarThemeData(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.lightSurface,
     ),
     colorScheme: ColorScheme(
-      brightness: .light,
-      primary: Color(0xff176EF1),
-      onPrimary: Colors.white,
-      surfaceContainer: Color(0xffF3F8FE),
-      onSurfaceVariant: Color(0xffB8B8B8),
-      primaryContainer: Color(0xffF3F8FE),
-      onPrimaryContainer: Color(0xff176EF1),
-      secondary: Colors.white,
-      onSecondary: Color(0xffB8B8B8),
-      error: Colors.red,
-      onError: Colors.white,
-      surface: Colors.white,
-      onSurface: Colors.black,
-      outline: Color(0xffE0E5EB)
+      brightness: Brightness.light,
+      primary: AppColors.lightPrimary,
+      onPrimary: AppColors.lightOnPrimary,
+      surfaceContainer: AppColors.lightSurfaceContainer,
+      onSurfaceVariant: AppColors.lightOnSurfaceVariant,
+      primaryContainer: AppColors.lightPrimaryContainer,
+      onPrimaryContainer: AppColors.lightOnPrimaryContainer,
+      secondary: AppColors.lightSecondary,
+      onSecondary: AppColors.lightOnSecondary,
+      error: AppColors.lightError,
+      onError: AppColors.lightOnError,
+      surface: AppColors.lightSurface,
+      onSurface: AppColors.lightOnSurface,
+      outline: AppColors.lightOutline
     ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
         fontFamily: 'Hiatus',
         fontSize: 116,
-        color: Colors.white
+        color: AppColors.lightOnPrimary
       ),
       displayMedium: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 32,
-        fontWeight: .w500,
+        fontWeight: FontWeight.w500,
       ),
 
       titleLarge: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 18,
-        fontWeight: .w500,
+        fontWeight: FontWeight.w500,
       ), //section titles
       titleMedium: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 14,
-        fontWeight: .w600,
+        fontWeight: FontWeight.w600,
       ), //card titles
       titleSmall: TextStyle(
         fontFamily: 'Montserrat',
         fontSize: 12,
-        fontWeight: .w600,
+        fontWeight: FontWeight.w600,
       ), //card titles
 
       bodyMedium: TextStyle(
@@ -121,7 +85,7 @@ class AppTheme {
         textStyle: TextStyle(
           fontFamily: 'Montserrat',
           fontSize: 16,
-          fontWeight: .w600
+          fontWeight: FontWeight.w600
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -130,9 +94,9 @@ class AppTheme {
     ),
     extensions: [
       DifficultyColors(
-        easy: Color(0xff4CAF50),
-        medium: Color(0xffFF9800),
-        hard: Color(0xffF44336),
+        easy: AppColors.difficultyEasy,
+        medium: AppColors.difficultyMedium,
+        hard: AppColors.difficultyHard,
       ),
     ],
   );

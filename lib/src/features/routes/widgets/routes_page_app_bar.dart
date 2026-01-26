@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 import '../types/route_filtering_method.dart';
 import '../types/route_sorting_method.dart';
-import '../utils/context_extensions.dart';
 import 'filter_chip.dart';
 import 'sorting_chip.dart';
 

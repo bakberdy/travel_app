@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../utils/context_extensions.dart';
+import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 
 class LabeledIcon extends StatelessWidget {
   const LabeledIcon({

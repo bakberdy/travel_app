@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/src/features/routes/widgets/custom_search_bar.dart';
+import 'package:travel_app/src/features/routes/widgets/custom_search_bar.dart';
 
 void main() {
   group('CustomSearchBar widget test', () {

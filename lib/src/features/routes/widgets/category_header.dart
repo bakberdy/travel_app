@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../utils/context_extensions.dart';
+import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 
 class CategoryHeader extends StatelessWidget {
   const CategoryHeader({super.key, required this.title, this.onSeeAllTapped});

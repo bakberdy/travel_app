@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/context_extensions.dart';
+import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 
 class LocationButton extends StatelessWidget {
   const LocationButton({super.key, required this.onTap, required this.text});

@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import '../utils/context_extensions.dart';
+import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
+import 'package:travel_app/src/core/utils/extensions/string_extensions.dart';
 import '../types/route_filtering_method.dart';
-import '../utils/string_extensions.dart';
 
 class FilteringChip extends StatelessWidget {
   const FilteringChip({

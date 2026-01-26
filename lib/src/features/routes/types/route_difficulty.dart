@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/src/config/theme/app_theme.dart';
+import 'package:travel_app/src/config/theme/app_theme_extensions.dart';
 
 enum RouteDifficulty { easy, medium, hard }
 
