@@ -12,11 +12,12 @@ part 'app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
-    // AutoRoute(page: Onboa.page, path: '/users'),
-    
+    AutoRoute(page: RoutesRoute.page),
+
     AutoRoute(
       initial: true,
       page: MainNavigationRoute.page,
+
       guards: [AuthGuard()],
       children: [
         AutoRoute(page: OnboardingRoute.page),

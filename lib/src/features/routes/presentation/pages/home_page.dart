@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_app/src/config/router/app_router.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 import '../../domain/entities/location_entity.dart';
 import '../../domain/entities/route_entity.dart';
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage>
           SliverToBoxAdapter(child: SizedBox(height: 15)),
           SliverToBoxAdapter(
             child: CategorySection(
-              onSeeAll: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoutesPage())),
+              onSeeAll: () => context.pushRoute(RoutesRoute(category: 'Popular')),
               routes: [sampleRoute, sampleRoute, sampleRoute],
               title: 'Popular',
             ),

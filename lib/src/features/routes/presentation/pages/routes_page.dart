@@ -62,9 +62,8 @@ class _RoutesPageState extends State<RoutesPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            // pinned: true,
+            pinned: true,
             floating: true,
-            snap: true,
             centerTitle: true,
             title: Text('Routes'),
             actions: [
