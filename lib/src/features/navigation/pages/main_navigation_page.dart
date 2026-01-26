@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/config/router/app_router.dart';
 import 'package:travel_app/src/features/navigation/providers/scroll_to_top_provider.dart';
-import 'package:travel_app/src/features/navigation/widgets/bottom_navigation_bar_widget.dart';
 import 'package:travel_app/src/features/navigation/widgets/nav_bar.dart';
 import 'package:travel_app/src/features/navigation/widgets/nav_bar_item.dart';
 
@@ -39,7 +38,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
           OnboardingRoute(),
         ],
         bottomNavigationBuilder: (context, tabsRouter) => NavBar(
-          
+
           initialPage: tabsRouter.activeIndex,
           onPageChanged: (int value) {
             if (value != tabsRouter.activeIndex) {
