@@ -423,6 +423,21 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String failure_3005(String minKm, String maxKm) {
+    return 'Minimum distance ($minKm km) cannot be greater than maximum distance ($maxKm km).';
+  }
+
+  @override
+  String failure_3006(String minKm) {
+    return 'Minimum distance cannot be negative ($minKm km).';
+  }
+
+  @override
+  String failure_3007(String maxKm) {
+    return 'Maximum distance cannot be negative ($maxKm km).';
+  }
+
+  @override
   String get failure_4000 => 'Operation failed due to business rules.';
 
   @override

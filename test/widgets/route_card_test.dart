@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:travel_app/src/features/routes/domain/entities/location_entity.dart';
 import 'package:travel_app/src/features/routes/domain/entities/route_entity.dart';
-import 'package:travel_app/src/features/routes/presentation/types/route_difficulty.dart';
+import 'package:travel_app/src/features/routes/domain/entities/route_difficulty_entity.dart';
 import 'package:travel_app/src/features/routes/presentation/widgets/route_card.dart';
 import 'package:travel_app/src/features/routes/presentation/widgets/labeled_icon.dart';
 
@@ -19,7 +19,7 @@ void main() {
       gorge: 'Big Almaty Gorge',
       difficulty: RouteDifficulty.medium,
       distanceKm: 10.5,
-      imageUrl: 'https://example.com/image.jpg',
+      imageUrl: 'https://example.com/image.jpg', type: .lake,
     );
 
     testWidgets('should display route title', (tester) async {
@@ -105,7 +105,7 @@ void main() {
         gorge: 'Test Gorge',
         difficulty: RouteDifficulty.easy,
         distanceKm: 5.0,
-        imageUrl: 'https://example.com/image.jpg',
+        imageUrl: 'https://example.com/image.jpg', type: .lake,
       );
 
       // Act

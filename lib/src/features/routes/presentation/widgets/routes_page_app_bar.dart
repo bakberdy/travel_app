@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import '../types/route_filtering_method.dart';
-import '../types/route_sorting_method.dart';
+import '../../domain/entities/route_filtering_method_entity.dart';
+import '../../domain/entities/route_sorting_method_entity.dart';
 import 'filter_chip.dart';
 import 'sorting_chip.dart';
 
@@ -18,7 +18,7 @@ class RoutesPageAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onFilteringChipRemove,
   });
 
-  final RouteSortingMethod sortingMethod;
+  final RouteSortingMethodEntity sortingMethod;
   final List<RouteFilteringMethod>? filteringMethods;
   final VoidCallback? onSortTap;
   final VoidCallback? onFilterTap;

@@ -168,6 +168,33 @@
       }
     }
   },
+  "failure_3005": "Minimum distance ({minKm} km) cannot be greater than maximum distance ({maxKm} km).",
+  "@failure_3005": {
+    "placeholders": {
+      "minKm": {
+        "type": "String"
+      },
+      "maxKm": {
+        "type": "String"
+      }
+    }
+  },
+  "failure_3006": "Minimum distance cannot be negative ({minKm} km).",
+  "@failure_3006": {
+    "placeholders": {
+      "minKm": {
+        "type": "String"
+      }
+    }
+  },
+  "failure_3007": "Maximum distance cannot be negative ({maxKm} km).",
+  "@failure_3007": {
+    "placeholders": {
+      "maxKm": {
+        "type": "String"
+      }
+    }
+  },
   "failure_4000": "Operation failed due to business rules.",
   "failure_4001": "You don't have permission to perform this action.",
   "failure_4002": "This resource is already in use.",

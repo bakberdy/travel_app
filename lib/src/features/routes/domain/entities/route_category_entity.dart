@@ -1,0 +1,4 @@
+enum RouteCategoryEntity {
+  popular,
+  recommended
+}

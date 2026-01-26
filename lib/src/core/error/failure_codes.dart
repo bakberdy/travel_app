@@ -18,6 +18,9 @@ class FailureCode {
   static const String passwordTooShort = 'failure_3002';
   static const String passwordTooWeak = 'failure_3003';
   static const String requiredField = 'failure_3004';
+  static const String minKmGreaterThanMaxKm = 'failure_3005';
+  static const String minKmNegative = 'failure_3006';
+  static const String maxKmNegative = 'failure_3007';
   
   // Business Logic Failures (4xxx)
   static const String businessLogicError = 'failure_4000';

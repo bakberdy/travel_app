@@ -844,6 +844,24 @@ abstract class AppLocalizations {
   /// **'{field} is required.'**
   String failure_3004(String field);
 
+  /// No description provided for @failure_3005.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum distance ({minKm} km) cannot be greater than maximum distance ({maxKm} km).'**
+  String failure_3005(String minKm, String maxKm);
+
+  /// No description provided for @failure_3006.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum distance cannot be negative ({minKm} km).'**
+  String failure_3006(String minKm);
+
+  /// No description provided for @failure_3007.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum distance cannot be negative ({maxKm} km).'**
+  String failure_3007(String maxKm);
+
   /// No description provided for @failure_4000.
   ///
   /// In en, this message translates to:

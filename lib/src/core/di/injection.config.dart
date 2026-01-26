@@ -34,8 +34,12 @@ import 'package:travel_app/src/features/routes/domain/repositories/routes_reposi
     as _i642;
 import 'package:travel_app/src/features/routes/domain/usecases/get_route_types_usecase.dart'
     as _i936;
+import 'package:travel_app/src/features/routes/domain/usecases/get_routes_usecase.dart'
+    as _i990;
 import 'package:travel_app/src/features/routes/presentation/blocs/route_types/route_type_bloc.dart'
     as _i204;
+import 'package:travel_app/src/features/routes/presentation/blocs/routes/routes_bloc.dart'
+    as _i446;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -74,8 +78,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i936.GetRouteTypesUsecase>(
       () => _i936.GetRouteTypesUsecase(gh<_i642.RoutesRepository>()),
     );
+    gh.lazySingleton<_i990.GetRoutesUsecase>(
+      () => _i990.GetRoutesUsecase(gh<_i642.RoutesRepository>()),
+    );
     gh.factory<_i204.RouteTypeBloc>(
       () => _i204.RouteTypeBloc(gh<_i936.GetRouteTypesUsecase>()),
+    );
+    gh.factory<_i446.RoutesBloc>(
+      () => _i446.RoutesBloc(gh<_i990.GetRoutesUsecase>()),
     );
     return this;
   }

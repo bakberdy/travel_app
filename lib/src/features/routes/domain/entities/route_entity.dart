@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:travel_app/src/features/routes/domain/entities/route_type_entity.dart';
 import 'location_entity.dart';
-import '../../presentation/types/route_difficulty.dart';
+import 'route_difficulty_entity.dart';
 
 class RouteEntity extends Equatable {
   final String title;
@@ -12,7 +12,7 @@ class RouteEntity extends Equatable {
   final List<LocationEntity> coordinates;
   final String direction; //for example Заилийский Алатау
   final String gorge; // ущелье, например Большое Алматинское Ущелье
-  final RouteDifficulty difficulty;
+  final RouteDifficultyEntity difficulty;
   final double distanceKm;
   final RouteTypeEntity type;
 

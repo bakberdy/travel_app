@@ -424,6 +424,21 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String failure_3005(String minKm, String maxKm) {
+    return 'Минимальное расстояние ($minKm км) не может быть больше максимального расстояния ($maxKm км).';
+  }
+
+  @override
+  String failure_3006(String minKm) {
+    return 'Минимальное расстояние не может быть отрицательным ($minKm км).';
+  }
+
+  @override
+  String failure_3007(String maxKm) {
+    return 'Максимальное расстояние не может быть отрицательным ($maxKm км).';
+  }
+
+  @override
   String get failure_4000 => 'Операция не выполнена из-за бизнес-правил.';
 
   @override

@@ -422,6 +422,21 @@ class AppLocalizationsKk extends AppLocalizations {
   }
 
   @override
+  String failure_3005(String minKm, String maxKm) {
+    return 'Минималды қашықтық ($minKm км) максималды қашықтықтан ($maxKm км) үлкен бола алмайды.';
+  }
+
+  @override
+  String failure_3006(String minKm) {
+    return 'Минималды қашықтық теріс бола алмайды ($minKm км).';
+  }
+
+  @override
+  String failure_3007(String maxKm) {
+    return 'Максималды қашықтық теріс бола алмайды ($maxKm км).';
+  }
+
+  @override
   String get failure_4000 =>
       'Операция бизнес ережелеріне байланысты орындалмады.';
 

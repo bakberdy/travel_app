@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import '../types/route_sorting_method.dart';
+import '../../domain/entities/route_sorting_method_entity.dart';
 
 class SortingBottomSheet extends StatelessWidget {
   const SortingBottomSheet({
@@ -9,18 +9,18 @@ class SortingBottomSheet extends StatelessWidget {
     required this.onSortingMethodSelected,
   });
 
-  final RouteSortingMethod currentSortingMethod;
-  final ValueChanged<RouteSortingMethod> onSortingMethodSelected;
+  final RouteSortingMethodEntity currentSortingMethod;
+  final ValueChanged<RouteSortingMethodEntity> onSortingMethodSelected;
 
-  String _getSortingMethodLabel(RouteSortingMethod method) {
+  String _getSortingMethodLabel(RouteSortingMethodEntity method) {
     switch (method) {
-      case RouteSortingMethod.distanceAscending:
+      case RouteSortingMethodEntity.distanceAscending:
         return 'Distance: Shortest First';
-      case RouteSortingMethod.distanceDescending:
+      case RouteSortingMethodEntity.distanceDescending:
         return 'Distance: Longest First';
-      case RouteSortingMethod.difficultyAscending:
+      case RouteSortingMethodEntity.difficultyAscending:
         return 'Difficulty: Easy First';
-      case RouteSortingMethod.difficultyDescending:
+      case RouteSortingMethodEntity.difficultyDescending:
         return 'Difficulty: Hard First';
     }
   }
@@ -59,10 +59,10 @@ class SortingBottomSheet extends StatelessWidget {
             ListView.separated(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: RouteSortingMethod.values.length,
+              itemCount: RouteSortingMethodEntity.values.length,
               separatorBuilder: (context, index) => SizedBox(height: 0),
               itemBuilder: (context, index) {
-                final method = RouteSortingMethod.values[index];
+                final method = RouteSortingMethodEntity.values[index];
                 final isSelected = method == currentSortingMethod;
 
                 return ListTile(
@@ -97,8 +97,8 @@ class SortingBottomSheet extends StatelessWidget {
 
   static void show(
     BuildContext context, {
-    required RouteSortingMethod currentSortingMethod,
-    required ValueChanged<RouteSortingMethod> onSortingMethodSelected,
+    required RouteSortingMethodEntity currentSortingMethod,
+    required ValueChanged<RouteSortingMethodEntity> onSortingMethodSelected,
   }) {
     showModalBottomSheet(
       context: context,

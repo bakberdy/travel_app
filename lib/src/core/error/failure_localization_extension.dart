@@ -52,6 +52,9 @@ extension FailureLocalization on Failure {
         case 'failure_3002': return l10n.failure_3002(messageParams?['minLength'] ?? '6');
         case 'failure_3003': return l10n.failure_3003;
         case 'failure_3004': return l10n.failure_3004(messageParams?['field'] ?? 'Field');
+        case 'failure_3005': return l10n.failure_3005(messageParams?['minKm'] ?? '0', messageParams?['maxKm'] ?? '0');
+        case 'failure_3006': return l10n.failure_3006(messageParams?['minKm'] ?? '0');
+        case 'failure_3007': return l10n.failure_3007(messageParams?['maxKm'] ?? '0');
         case 'failure_4000': return l10n.failure_4000;
         case 'failure_4001': return l10n.failure_4001;
         case 'failure_4002': return l10n.failure_4002;

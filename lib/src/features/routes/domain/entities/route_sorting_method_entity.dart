@@ -1,4 +1,4 @@
-enum RouteSortingMethod {
+enum RouteSortingMethodEntity {
   distanceAscending,
   distanceDescending,
   difficultyAscending,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../types/route_difficulty.dart';
-import '../types/route_filtering_method.dart';
+import 'package:travel_app/src/features/routes/presentation/ui_utils/route_difficulty.dart';
+import '../../domain/entities/route_difficulty_entity.dart';
+import '../../domain/entities/route_filtering_method_entity.dart';
 
 class FilteringBottomSheet extends StatefulWidget {
   const FilteringBottomSheet({
@@ -34,7 +35,7 @@ class FilteringBottomSheet extends StatefulWidget {
 
 class _FilteringBottomSheetState extends State<FilteringBottomSheet> {
   // Filter state
-  Set<RouteDifficulty> selectedDifficulties = {};
+  Set<RouteDifficultyEntity> selectedDifficulties = {};
   RangeValues distanceRange = RangeValues(0, 50);
   Set<String> selectedTypes = {};
 
@@ -187,7 +188,7 @@ class _FilteringBottomSheetState extends State<FilteringBottomSheet> {
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
-                      children: RouteDifficulty.values.map((difficulty) {
+                      children: RouteDifficultyEntity.values.map((difficulty) {
                         final isSelected = selectedDifficulties.contains(difficulty);
                         final difficultyColor = difficulty.getColor(context);
 

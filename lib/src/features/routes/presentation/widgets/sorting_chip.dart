@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import '../types/route_sorting_method.dart';
+import '../../domain/entities/route_sorting_method_entity.dart';
 
 class SortingChip extends StatelessWidget {
   const SortingChip({
@@ -11,7 +11,7 @@ class SortingChip extends StatelessWidget {
     this.onRemoveTap,
   });
 
-  final RouteSortingMethod sortingMethod;
+  final RouteSortingMethodEntity sortingMethod;
   final VoidCallback? onTap;
   final VoidCallback? onRemoveTap;
 
