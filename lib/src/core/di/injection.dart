@@ -31,5 +31,5 @@ Future<void> configureDependencies() async {
   ], enableAnalytics: AppConfig.instance.enableAnalytics);
   Bloc.observer = LoggerBlocObserver();
 
-  sl.init();
+  await sl.init();
 }
