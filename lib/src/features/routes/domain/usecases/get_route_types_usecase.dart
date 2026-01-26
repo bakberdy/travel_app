@@ -6,12 +6,12 @@ import 'package:travel_app/src/features/routes/domain/entities/route_type_entity
 import 'package:travel_app/src/features/routes/domain/repositories/routes_repository.dart';
 
 @LazySingleton()
-class GetRouteTypesUsecase extends UseCase<List<RouteTypeEntity>, NoParams>{
+class GetRouteTypesUsecase extends UseCase<Set<RouteTypeEntity>, NoParams>{
   final RoutesRepository _repo;
 
   GetRouteTypesUsecase(this._repo);
   @override
-  Future<Either<Failure, List<RouteTypeEntity>>> call(NoParams params) {
+  Future<Either<Failure, Set<RouteTypeEntity>>> call(NoParams params) {
     return _repo.getRouteTypes();
   }
 }
