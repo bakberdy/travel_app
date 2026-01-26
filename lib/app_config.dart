@@ -1,4 +1,7 @@
+enum Environment { development, staging, production }
+
 class AppConfig {
+  final Environment environment;
   final bool enableLogging;
   final bool enableAnalytics;
   final bool enableCrashlytics;
@@ -9,6 +12,7 @@ class AppConfig {
 
   AppConfig({
     required this.baseUrl,
+    required this.environment,
     required this.enableLogging,
     required this.enableAnalytics,
     required this.enableCrashlytics,
@@ -20,12 +24,44 @@ class AppConfig {
   static AppConfig? _instance;
   static AppConfig get instance => _instance!;
 
-  static void initialize() {
-    _instance = AppConfig(
-      baseUrl: 'http://3.79.185.15:5200',
-      enableLogging: true,
-      enableAnalytics: true,
-      enableCrashlytics: false,
-    );
+  static void initialize({Environment? env, String? envString}) {
+    final envFromString = switch (envString) {
+      'staging' => Environment.staging,
+      'production' => Environment.production,
+      'development' => Environment.development,
+      _=>null
+    };
+
+    env ??= envFromString ?? Environment.development;
+
+    switch (env) {
+      case Environment.development:
+        _instance = AppConfig(
+          baseUrl: 'https://dev.api.example.com/v1/',
+          environment: env,
+          enableLogging: true,
+          enableAnalytics: false,
+          enableCrashlytics: true,
+        );
+        break;
+      case Environment.staging:
+        _instance = AppConfig(
+          baseUrl: 'https://staging.api.example.com/v1/',
+          environment: env,
+          enableLogging: true,
+          enableAnalytics: true,
+          enableCrashlytics: false,
+        );
+        break;
+      case Environment.production:
+        _instance = AppConfig(
+          baseUrl: 'https://api.example.com/v1/',
+          environment: env,
+          enableLogging: false,
+          enableAnalytics: true,
+          enableCrashlytics: false,
+        );
+        break;
+    }
   }
 }

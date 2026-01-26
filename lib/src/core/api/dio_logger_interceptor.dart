@@ -88,12 +88,28 @@ class DioLoggerInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (logError) {
-      final statusCode = err.response?.statusCode ?? 'Unknown';
-      final message = err.response?.data?.toString() ?? 'Request failed';
-      
+      final buffer = StringBuffer();
+      buffer.write(
+        'Error ${err.response?.statusCode ?? 'Unknown'} on ${err.requestOptions.method} ${err.requestOptions.uri}',
+      );
+
+      if (err.type != DioExceptionType.unknown) {
+        buffer.write('\n  Type: ${err.type}');
+      }
+
+      if (err.message != null) {
+        buffer.write('\n  Message: ${err.message}');
+      }
+
+      if (err.response?.data != null) {
+        buffer.write('\n  Response: ${_formatData(err.response!.data)}');
+      }
+
       Logger.error(
-        'Error $statusCode on ${err.requestOptions.method} ${err.requestOptions.uri}: $message',
+        buffer.toString(),
         category: LogCategory.api,
+        error: err,
+        stackTrace: err.stackTrace,
       );
     }
 
