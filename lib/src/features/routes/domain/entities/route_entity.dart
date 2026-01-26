@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'location_entity.dart';
-import '../types/route_difficulty.dart';
+import '../../presentation/types/route_difficulty.dart';
 
 class RouteEntity extends Equatable {
   final String title;

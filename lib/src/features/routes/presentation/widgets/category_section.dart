@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../entities/route_entity.dart';
+import '../../domain/entities/route_entity.dart';
 import 'category_header.dart';
 import 'route_card.dart';
 

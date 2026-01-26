@@ -43,7 +43,7 @@ class _NavBarEntryState extends State<NavBarEntry>
       reverseDuration: const Duration(milliseconds: 160),
     );
 
-    _iconScale = Tween<double>(begin: 0.92, end: 1.1)
+    _iconScale = Tween<double>(begin: 1, end: 1.1)
         .chain(CurveTween(curve: Curves.easeOutCubic))
         .animate(animationController);
 
@@ -54,7 +54,7 @@ class _NavBarEntryState extends State<NavBarEntry>
     );
     _tapScale = Tween<double>(
       begin: 1.0,
-      end: 1.1,
+      end: 0.9,
     ).chain(CurveTween(curve: Curves.easeOut)).animate(_tapController);
     if (widget.isSelected) {
       animationController.value = 1;
@@ -92,12 +92,18 @@ class _NavBarEntryState extends State<NavBarEntry>
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {
+      onTapDown: (_) {
+        _tapController.forward(from: 0);
+      },
+      onTapUp: (_) {
+        _tapController.reverse();
         if (bottomTheme.enableFeedback == true) {
           HapticFeedback.lightImpact();
         }
-        _tapController.forward(from: 0);
         widget.onTap();
+      },
+      onTapCancel: () {
+        _tapController.reverse();
       },
       child: IconTheme(
         data: widget.isSelected

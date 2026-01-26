@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import '../entities/location_entity.dart';
-import '../entities/route_entity.dart';
+import '../../domain/entities/location_entity.dart';
+import '../../domain/entities/route_entity.dart';
 import 'routes_page.dart';
 import '../types/route_type.dart' as route_type;
 import '../widgets/category_section.dart';

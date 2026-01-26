@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../entities/location_entity.dart';
-import '../entities/route_entity.dart';
+import '../../domain/entities/location_entity.dart';
+import '../../domain/entities/route_entity.dart';
 import '../types/route_filtering_method.dart';
 import '../types/route_sorting_method.dart';
 import '../widgets/custom_search_bar.dart';

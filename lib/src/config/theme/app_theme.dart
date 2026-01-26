@@ -37,7 +37,7 @@ class AppTheme {
             color: AppColors.lightPrimary,
             fontWeight: FontWeight.w600,
           ),
-          unselectedLabelStyle: TextStyle(color: AppColors.lightOnSurface),
+          unselectedLabelStyle: TextStyle(color: AppColors.lightOnSurface, fontSize: 12),
         ),
     textTheme: TextTheme(
       displayLarge: TextStyle(

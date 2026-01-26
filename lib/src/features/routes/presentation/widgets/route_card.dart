@@ -2,7 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import '../entities/route_entity.dart';
+import '../../domain/entities/route_entity.dart';
 import 'labeled_icon.dart';
 
 class RouteCard extends StatelessWidget {

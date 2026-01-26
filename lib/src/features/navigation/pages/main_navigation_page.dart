@@ -48,8 +48,8 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
             }
           },
           items: [
-            NavBarItem(icon: const Icon(Icons.home), label: 'Home'),
-            NavBarItem(icon: const Icon(Icons.person), label: 'Profile'),
+            NavBarItem(icon: const Icon(Icons.home, size: 20,), label: 'Home'),
+            NavBarItem(icon: const Icon(Icons.person, size: 20,), label: 'Profile'),
           ],
         ),
       ),

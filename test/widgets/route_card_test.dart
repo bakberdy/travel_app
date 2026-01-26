@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:travel_app/src/features/routes/entities/location_entity.dart';
-import 'package:travel_app/src/features/routes/entities/route_entity.dart';
-import 'package:travel_app/src/features/routes/types/route_difficulty.dart';
-import 'package:travel_app/src/features/routes/widgets/route_card.dart';
-import 'package:travel_app/src/features/routes/widgets/labeled_icon.dart';
+import 'package:travel_app/src/features/routes/domain/entities/location_entity.dart';
+import 'package:travel_app/src/features/routes/domain/entities/route_entity.dart';
+import 'package:travel_app/src/features/routes/presentation/types/route_difficulty.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/route_card.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/labeled_icon.dart';
 
 void main() {
   group('RouteCard Widget Tests', () {

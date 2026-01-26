@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 import 'package:travel_app/src/features/navigation/widgets/nav_bar_item.dart';
 
 class NavBar extends StatefulWidget {
@@ -55,7 +56,7 @@ class _NavBarState extends State<NavBar> {
     final slotWidth = widget.itemWidth + spacing;
     final indicatorLeft = _dragLeft ?? _currentPage * slotWidth;
     final indicatorRight = totalWidth - indicatorLeft - widget.itemWidth;
-    final isLtr = Directionality.of(context) == TextDirection.ltr;
+    final isLtr = context.isRTL;
     final theme = Theme.of(context);
     final sliderColor = widget.sliderColor ?? theme.primaryColor.withAlpha(100);
 

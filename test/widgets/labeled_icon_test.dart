@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:travel_app/src/features/routes/widgets/labeled_icon.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/labeled_icon.dart';
 
 void main() {
   group('LabeledIcon Widget Tests', () {
