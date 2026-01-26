@@ -323,5 +323,9 @@
   "productSkylineBounce": "Skyline Bounce",
   "productOrbitFlow": "Orbit Flow",
   "featuredAriaMomentum": "Aria Momentum",
-  "featuredVaporStride": "Vapor Stride"
+  "featuredVaporStride": "Vapor Stride",
+  "sortingDistanceAscending": "Distance: Shorter to Longer",
+  "sortingDistanceDescending": "Distance: Longer to Shorter",
+  "sortingDifficultyAscending": "Difficulty: Easiest First",
+  "sortingDifficultyDescending": "Difficulty: Hardest First"
 }

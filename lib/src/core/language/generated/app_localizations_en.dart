@@ -838,4 +838,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get featuredVaporStride => 'Vapor Stride';
+
+  @override
+  String get sortingDistanceAscending => 'Distance: Shorter to Longer';
+
+  @override
+  String get sortingDistanceDescending => 'Distance: Longer to Shorter';
+
+  @override
+  String get sortingDifficultyAscending => 'Difficulty: Easiest First';
+
+  @override
+  String get sortingDifficultyDescending => 'Difficulty: Hardest First';
 }

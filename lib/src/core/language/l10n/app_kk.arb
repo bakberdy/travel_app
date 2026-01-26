@@ -281,5 +281,9 @@
   "productSkylineBounce": "Skyline Bounce",
   "productOrbitFlow": "Orbit Flow",
   "featuredAriaMomentum": "Aria Momentum",
-  "featuredVaporStride": "Vapor Stride"
+  "featuredVaporStride": "Vapor Stride",
+  "sortingDistanceAscending": "Қашықтық: Қысқадан ұзынға",
+  "sortingDistanceDescending": "Қашықтық: Ұзыннан қысқаға",
+  "sortingDifficultyAscending": "Қиындық: Оңайлары бірінші",
+  "sortingDifficultyDescending": "Қиындық: Қиындары бірінші"
 }

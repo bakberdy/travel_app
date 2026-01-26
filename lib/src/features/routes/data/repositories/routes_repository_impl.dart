@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:travel_app/src/core/monitoring/logger.dart';
 import 'package:travel_app/src/core/utils/typedef.dart';
 import 'package:travel_app/src/features/routes/domain/entities/get_route_request_parameters_entity.dart';
 import 'package:travel_app/src/features/routes/domain/entities/route_entity.dart';
@@ -16,8 +17,19 @@ class RoutesRepositoryImpl implements RoutesRepository {
   }
 
   @override
-  FutureEither<List<RouteEntity>> getRoutes({required GetRouteRequestParametersEntity params}) async {
+  FutureEither<List<RouteEntity>> getRoutes({
+    required GetRouteRequestParametersEntity params,
+  }) async {
     await Future.delayed(Duration(seconds: 2));
+    Logger.debug(
+      'Getting routes with params:\n'
+      'types: ${params.types}\n'
+      'category: ${params.category}\n'
+      'sortingMethod: ${params.sortingMethod}\n'
+      'difficulties: ${params.difficulties}\n'
+      'minKm: ${params.minKm}\n'
+      'maxKm: ${params.maxKm}',
+    );
     return Right([]);
   }
 }

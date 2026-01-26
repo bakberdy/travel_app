@@ -836,4 +836,16 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get featuredVaporStride => 'Vapor Stride';
+
+  @override
+  String get sortingDistanceAscending => 'Қашықтық: Қысқадан ұзынға';
+
+  @override
+  String get sortingDistanceDescending => 'Қашықтық: Ұзыннан қысқаға';
+
+  @override
+  String get sortingDifficultyAscending => 'Қиындық: Оңайлары бірінші';
+
+  @override
+  String get sortingDifficultyDescending => 'Қиындық: Қиындары бірінші';
 }

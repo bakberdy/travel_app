@@ -1635,6 +1635,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vapor Stride'**
   String get featuredVaporStride;
+
+  /// No description provided for @sortingDistanceAscending.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance: Shorter to Longer'**
+  String get sortingDistanceAscending;
+
+  /// No description provided for @sortingDistanceDescending.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance: Longer to Shorter'**
+  String get sortingDistanceDescending;
+
+  /// No description provided for @sortingDifficultyAscending.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulty: Easiest First'**
+  String get sortingDifficultyAscending;
+
+  /// No description provided for @sortingDifficultyDescending.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulty: Hardest First'**
+  String get sortingDifficultyDescending;
 }
 
 class _AppLocalizationsDelegate

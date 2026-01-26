@@ -1,30 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import 'package:travel_app/src/core/utils/extensions/string_extensions.dart';
-import '../../domain/entities/route_filtering_method_entity.dart';
 
 class FilteringChip extends StatelessWidget {
   const FilteringChip({
     super.key,
-    required this.filteringMethod,
+    required this.label,
     this.onTap,
     this.onRemoveTap,
   });
 
-  final RouteFilteringMethod filteringMethod;
+  final String label;
   final VoidCallback? onTap;
   final VoidCallback? onRemoveTap;
-
-  String _getFilterLabel() {
-    return switch (filteringMethod) {
-      RouteFilteringMethodByType(:final type) => type,
-      RouteFilteringMethodByDifficulty(:final difficulty) =>
-        difficulty.name.capitalize(),
-      RouteFilteringMethodByDistanceRange(:final minKm, :final maxKm) =>
-        '$minKm-$maxKm km',
-    };
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +27,7 @@ class FilteringChip extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              _getFilterLabel(),
+             label,
               style: context.textTheme.labelMedium?.copyWith(
                 color: context.colorScheme.onPrimary,
               ),

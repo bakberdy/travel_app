@@ -6,8 +6,17 @@ sealed class RoutesState with _$RoutesState {
     @Default([]) List<RouteEntity> routes,
     @Default(StateStatus.initial) StateStatus routesStatus,
     String? routesErrorMessage,
-    @Default(RouteSortingMethodEntity.distanceAscending) RouteSortingMethodEntity sortingMethod,
-    List<RouteFilteringMethod>? filteringMethods,
     @Default('') String searchQuery,
+
+    @Default(RouteSortingMethodEntity.distanceAscending) RouteSortingMethodEntity sortingMethod,
+    RouteCategoryEntity? filteringCategory,
+    Set<RouteTypeEntity>? filteringTypes,
+    Set<RouteDifficultyEntity>? filteringDifficulties,
+    double? minKm,
+    double? maxKm,
+
+    @Default([]) List<FilterEntity> filters
+
+
   }) = _RoutesState;
 }

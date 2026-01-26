@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 import '../../domain/entities/route_sorting_method_entity.dart';
+import '../ui_utils/sorting_method_extension.dart';
 
 class SortingBottomSheet extends StatelessWidget {
   const SortingBottomSheet({
@@ -11,19 +12,6 @@ class SortingBottomSheet extends StatelessWidget {
 
   final RouteSortingMethodEntity currentSortingMethod;
   final ValueChanged<RouteSortingMethodEntity> onSortingMethodSelected;
-
-  String _getSortingMethodLabel(RouteSortingMethodEntity method) {
-    switch (method) {
-      case RouteSortingMethodEntity.distanceAscending:
-        return 'Distance: Shortest First';
-      case RouteSortingMethodEntity.distanceDescending:
-        return 'Distance: Longest First';
-      case RouteSortingMethodEntity.difficultyAscending:
-        return 'Difficulty: Easy First';
-      case RouteSortingMethodEntity.difficultyDescending:
-        return 'Difficulty: Hard First';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +55,7 @@ class SortingBottomSheet extends StatelessWidget {
 
                 return ListTile(
                   title: Text(
-                    _getSortingMethodLabel(method),
+                    method.localize(context),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: isSelected
                               ? Theme.of(context).colorScheme.primary

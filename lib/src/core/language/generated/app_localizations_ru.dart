@@ -838,4 +838,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get featuredVaporStride => 'Vapor Stride';
+
+  @override
+  String get sortingDistanceAscending => 'Расстояние: От короткого к длинному';
+
+  @override
+  String get sortingDistanceDescending => 'Расстояние: От длинного к короткому';
+
+  @override
+  String get sortingDifficultyAscending => 'Сложность: Простые первыми';
+
+  @override
+  String get sortingDifficultyDescending => 'Сложность: Сложные первыми';
 }

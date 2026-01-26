@@ -1,17 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import '../../domain/entities/route_sorting_method_entity.dart';
 
 class SortingChip extends StatelessWidget {
   const SortingChip({
     super.key,
-    required this.sortingMethod,
+    required this.label,
     this.onTap,
     this.onRemoveTap,
   });
 
-  final RouteSortingMethodEntity sortingMethod;
+  final String label;
   final VoidCallback? onTap;
   final VoidCallback? onRemoveTap;
 
@@ -38,7 +37,7 @@ class SortingChip extends StatelessWidget {
             SizedBox(width: 5),
 
             Text(
-              sortingMethod.name,
+              label,
               style: context.textTheme.labelMedium?.copyWith(
                 color: context.colorScheme.onPrimary,
               ),
