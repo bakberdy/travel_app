@@ -4,7 +4,7 @@ import 'package:travel_app/src/config/router/app_router.dart';
 import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 import '../../domain/entities/location_entity.dart';
 import '../../domain/entities/route_entity.dart';
-import '../types/route_type.dart' as route_type;
+import '../../domain/entities/route_type_entity.dart' as route_type;
 import '../widgets/category_section.dart';
 import '../widgets/custom_search_bar.dart';
 import '../widgets/location_button.dart';
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     _categoriesTabbarController = TabController(
-      length: route_type.RouteType.values.length,
+      length: route_type.RouteTypeEntity.values.length+1,
       vsync: this,
     );
     super.initState();
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage>
     gorge: 'Малое Алматинское ущелье (МАУ)',
     difficulty: .medium,
     distanceKm: 10.5,
-    imageUrl: 'https://morena.kz/foto/allfoto/ver%20mau/ver%20mau%20(3).jpg',
+    imageUrl: 'https://morena.kz/foto/allfoto/ver%20mau/ver%20mau%20(3).jpg', type: route_type.RouteTypeEntity.lake,
   );
 
   @override
@@ -97,11 +97,11 @@ class _HomePageState extends State<HomePage>
               ),
               indicatorSize: .tab,
               splashBorderRadius: .circular(16),
-              tabs: route_type.RouteType.values.map((type) {
+              tabs: [Tab(text: 'All'),...route_type.RouteTypeEntity.values.map((type) {
                 final name =
                     type.name[0].toUpperCase() + type.name.substring(1);
                 return Tab(text: name);
-              }).toList(),
+              })],
               controller: _categoriesTabbarController,
             ),
           ),

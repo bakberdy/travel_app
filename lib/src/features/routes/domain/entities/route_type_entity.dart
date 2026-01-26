@@ -1,4 +1,4 @@
-enum RouteType {
+enum RouteTypeEntity {
   peak,
   waterfall,
   lake

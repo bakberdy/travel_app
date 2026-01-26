@@ -52,6 +52,7 @@ class _RoutesPageState extends State<RoutesPage> {
         distanceKm: 10.5,
         imageUrl:
             'https://morena.kz/foto/allfoto/ver%20mau/ver%20mau%20(3).jpg',
+        type: .waterfall,
       ),
     );
   }
@@ -79,7 +80,11 @@ class _RoutesPageState extends State<RoutesPage> {
                     },
                   );
                 },
-                child: Image.asset('assets/icons/sort.png', height: 22, width: 22),
+                child: Image.asset(
+                  'assets/icons/sort.png',
+                  height: 22,
+                  width: 22,
+                ),
               ),
               SizedBox(width: 10),
               GestureDetector(
@@ -94,7 +99,11 @@ class _RoutesPageState extends State<RoutesPage> {
                     },
                   );
                 },
-                child: Image.asset('assets/icons/filter.png', height: 22, width: 22),
+                child: Image.asset(
+                  'assets/icons/filter.png',
+                  height: 22,
+                  width: 22,
+                ),
               ),
               SizedBox(width: 10),
             ],
@@ -102,11 +111,11 @@ class _RoutesPageState extends State<RoutesPage> {
               preferredSize: Size.fromHeight(90),
               child: Column(
                 children: [
-                  Padding(padding: .symmetric(horizontal: 16),
-                  child: CustomSearchBar(
-                    hintText: 'Find Your Route',
-                  )),
-                  SizedBox(height: 10,),
+                  Padding(
+                    padding: .symmetric(horizontal: 16),
+                    child: CustomSearchBar(hintText: 'Find Your Route'),
+                  ),
+                  SizedBox(height: 10),
                   Container(
                     padding: .only(bottom: 5),
                     height: 30,
@@ -114,11 +123,9 @@ class _RoutesPageState extends State<RoutesPage> {
                       padding: .symmetric(horizontal: 16),
                       scrollDirection: .horizontal,
                       children: [
-                        SortingChip(
-                          sortingMethod: sortingMethod,
-
-                        ),
-                        if (filteringMethods != null && filteringMethods!.isNotEmpty) ...[
+                        SortingChip(sortingMethod: sortingMethod),
+                        if (filteringMethods != null &&
+                            filteringMethods!.isNotEmpty) ...[
                           Center(
                             child: SizedBox(
                               height: 25,
@@ -148,19 +155,16 @@ class _RoutesPageState extends State<RoutesPage> {
           SliverPadding(
             padding: .symmetric(horizontal: 16, vertical: 20),
             sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  if (index.isOdd) {
-                    return SizedBox(height: 10);
-                  }
-                  final itemIndex = index ~/ 2;
-                  return HorizontalRouteCard(
-                    route: routes[itemIndex],
-                    onPressed: () {},
-                  );
-                },
-                childCount: routes.length * 2 - 1,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                if (index.isOdd) {
+                  return SizedBox(height: 10);
+                }
+                final itemIndex = index ~/ 2;
+                return HorizontalRouteCard(
+                  route: routes[itemIndex],
+                  onPressed: () {},
+                );
+              }, childCount: routes.length * 2 - 1),
             ),
           ),
         ],
