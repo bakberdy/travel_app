@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:travel_app/widgets/location_button.dart';
+import '../../lib/src/features/routes/widgets/location_button.dart';
 
 void main() {
   group('LocationButton Widget Tests', () {

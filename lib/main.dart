@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/pages/home_page.dart';
-import 'package:travel_app/theme.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:travel_app/app.dart';
+import 'package:travel_app/app_config.dart';
+import 'package:travel_app/src/core/di/injection.dart';
+import 'package:travel_app/src/core/monitoring/logger.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final directory = await getApplicationDocumentsDirectory();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: HydratedStorageDirectory(directory.path),
+  );
+  AppConfig.initialize();
+  Logger.initialize(enableLogging: AppConfig.instance.enableLogging);
+
+  await configureDependencies();
+
+  Logger.info('App started');
+
   runApp(const App());
-}
-
-class App extends StatefulWidget {
-  const App({super.key});
-
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.lightTheme,
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
 }
