@@ -28,6 +28,12 @@ import 'package:travel_app/src/core/storage/secure_storage/flutter_secure_storag
     as _i349;
 import 'package:travel_app/src/core/storage/secure_storage/secure_storage.dart'
     as _i412;
+import 'package:travel_app/src/features/routes/data/repositories/routes_repository_impl.dart'
+    as _i582;
+import 'package:travel_app/src/features/routes/domain/repositories/routes_repository.dart'
+    as _i642;
+import 'package:travel_app/src/features/routes/domain/usecases/get_route_types_usecase.dart'
+    as _i936;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -49,6 +55,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i908.LoggerPageObserver>(
       () => _i908.LoggerPageObserver(),
     );
+    gh.lazySingleton<_i642.RoutesRepository>(
+      () => _i582.RoutesRepositoryImpl(),
+    );
     gh.lazySingleton<_i412.SecureStorage>(
       () => _i349.FlutterSecureStorageImpl(gh<_i558.FlutterSecureStorage>()),
     );
@@ -59,6 +68,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i401.ApiClient>(
       () => _i401.ApiClient(gh<_i412.SecureStorage>()),
+    );
+    gh.lazySingleton<_i936.GetRouteTypesUsecase>(
+      () => _i936.GetRouteTypesUsecase(gh<_i642.RoutesRepository>()),
     );
     return this;
   }
