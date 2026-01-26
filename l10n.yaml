@@ -4,7 +4,6 @@ output-localization-file: app_localizations.dart
 output-class: AppLocalizations
 output-dir: lib/src/core/language/generated
 nullable-getter: false
-generate: true
 
 
 # flutter gen-l10n

@@ -1,90 +1,157 @@
-import 'package:flutter/material.dart';
-import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
-import '../../domain/entities/route_filtering_method_entity.dart';
-import '../../domain/entities/route_sorting_method_entity.dart';
-import 'filter_chip.dart';
-import 'sorting_chip.dart';
 
-class RoutesPageAppBar extends StatelessWidget implements PreferredSizeWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_app/src/features/routes/domain/entities/route_filtering_method_entity.dart';
+import 'package:travel_app/src/features/routes/domain/entities/route_sorting_method_entity.dart';
+import 'package:travel_app/src/features/routes/presentation/blocs/routes/routes_bloc.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/custom_search_bar.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/filter_chip.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/filtering_bottom_sheet.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/sorting_bottom_sheet.dart';
+import 'package:travel_app/src/features/routes/presentation/widgets/sorting_chip.dart';
+
+class RoutesPageAppBar extends StatefulWidget {
   const RoutesPageAppBar({
     super.key,
     required this.sortingMethod,
     required this.filteringMethods,
-    this.onSortTap,
-    this.onFilterTap,
-    this.onSortingChipTap,
-    this.onSortingChipRemove,
-    this.onFilteringChipTap,
-    this.onFilteringChipRemove,
+    required this.searchQuery,
   });
 
-  final RouteSortingMethodEntity sortingMethod;
+  final RouteSortingMethodEntity? sortingMethod;
   final List<RouteFilteringMethod>? filteringMethods;
-  final VoidCallback? onSortTap;
-  final VoidCallback? onFilterTap;
-  final VoidCallback? onSortingChipTap;
-  final VoidCallback? onSortingChipRemove;
-  final void Function(RouteFilteringMethod)? onFilteringChipTap;
-  final void Function(RouteFilteringMethod)? onFilteringChipRemove;
+  final String searchQuery;
 
   @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(30),
-        child: SizedBox(
-          height: 30,
-          child: ListView(
-            padding: .symmetric(horizontal: 16),
-            scrollDirection: .horizontal,
-            children: [
-              SortingChip(
-                sortingMethod: sortingMethod,
-                onTap: onSortingChipTap,
-                onRemoveTap: onSortingChipRemove,
-              ),
-              if (filteringMethods != null && filteringMethods!.isNotEmpty) ...[
-                Center(
-                  child: SizedBox(
-                    height: 25,
-                    child: VerticalDivider(
-                      color: context.colorScheme.outline,
-                      thickness: 2,
-                    ),
-                  ),
-                ),
-                ...filteringMethods!.map(
-                  (filter) => Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: FilteringChip(
-                      filteringMethod: filter,
-                      onTap: () => onFilteringChipTap?.call(filter),
-                      onRemoveTap: () => onFilteringChipRemove?.call(filter),
-                    ),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
-      centerTitle: true,
-      title: Text('Routes'),
-      actions: [
-        GestureDetector(
-          onTap: onSortTap,
-          child: Image.asset('assets/icons/sort.png', height: 22, width: 22),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: onFilterTap,
-          child: Image.asset('assets/icons/filter.png', height: 22, width: 22),
-        ),
-        SizedBox(width: 10),
-      ],
-    );
+  State<RoutesPageAppBar> createState() => _AppBarState();
+}
+
+class _AppBarState extends State<RoutesPageAppBar> {
+  late final TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController(text: widget.searchQuery);
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(90);
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<RoutesBloc>();
+
+    return SliverAppBar(
+      pinned: true,
+      floating: true,
+      centerTitle: true,
+      title: const Text('Routes'),
+      actions: [
+        GestureDetector(
+          onTap: () {
+            SortingBottomSheet.show(
+              context,
+              currentSortingMethod:
+                  widget.sortingMethod ??
+                  RouteSortingMethodEntity.distanceAscending,
+              onSortingMethodSelected: (method) {
+                bloc.add(RoutesEvent.updateSorting(sortingMethod: method));
+              },
+            );
+          },
+          child: Image.asset('assets/icons/sort.png', height: 22, width: 22),
+        ),
+        const SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            FilteringBottomSheet.show(
+              context,
+              initialFilters: widget.filteringMethods,
+              onApplyFilters: (filters) {
+                bloc.add(RoutesEvent.updateFilters(filteringMethods: filters));
+              },
+            );
+          },
+          child: Image.asset('assets/icons/filter.png', height: 22, width: 22),
+        ),
+        const SizedBox(width: 10),
+      ],
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(90),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: CustomSearchBar(
+                hintText: 'Find Your Route',
+                controller: _searchController,
+                onChanged: (query) {
+                  bloc.add(RoutesEvent.updateSearch(searchQuery: query));
+                },
+              ),
+            ),
+            const SizedBox(height: 10),
+            _ChipsRow(
+              sortingMethod: widget.sortingMethod,
+              filteringMethods: widget.filteringMethods,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class _ChipsRow extends StatelessWidget {
+  const _ChipsRow({
+    required this.sortingMethod,
+    required this.filteringMethods,
+  });
+
+  final RouteSortingMethodEntity? sortingMethod;
+  final List<RouteFilteringMethod>? filteringMethods;
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<RoutesBloc>();
+
+    return Container(
+      padding: const EdgeInsets.only(bottom: 5),
+      height: 30,
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        scrollDirection: Axis.horizontal,
+        children: [
+          if (sortingMethod != null) SortingChip(sortingMethod: sortingMethod!),
+          if (filteringMethods != null && filteringMethods!.isNotEmpty) ...[
+            Center(
+              child: SizedBox(
+                height: 25,
+                child: VerticalDivider(
+                  color: Theme.of(context).colorScheme.outline,
+                  thickness: 2,
+                ),
+              ),
+            ),
+            ...filteringMethods!.map(
+              (filter) => Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilteringChip(
+                  filteringMethod: filter,
+                  onRemoveTap: () {
+                    bloc.add(RoutesEvent.removeFilter(filterToRemove: filter));
+                  },
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 }
