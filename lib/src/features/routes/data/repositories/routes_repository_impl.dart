@@ -27,6 +27,7 @@ class RoutesRepositoryImpl implements RoutesRepository {
       'category: ${params.category}\n'
       'sortingMethod: ${params.sortingMethod}\n'
       'difficulties: ${params.difficulties}\n'
+      'search: ${params.searchQuery}\n'
       'minKm: ${params.minKm}\n'
       'maxKm: ${params.maxKm}',
     );

@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePageContent>
   Future<void> onRefresh() async {
     // Trigger data refresh
     routeTypeBloc.add(GetRouteTypesEvent());
-    routesByCategoryBloc.add(RoutesByCategoryEvent.loadAll());
+    routesByCategoryBloc.add(RoutesByCategoryEvent.loadAll(type: _selectedType));
 
     // Wait for the state to complete (success or failure)
     await routeTypeBloc.stream.firstWhere(
@@ -79,21 +79,6 @@ class _HomePageState extends State<HomePageContent>
           state.routeTypesStatus == StateStatus.error,
     );
   }
-
-  final sampleRoute = RouteEntity(
-    title: 'ЧЁРНЫЙ ВОДОПАД',
-    location: LocationEntity(name: 'Урочище Ворота Туюк-Су', lat: 0, long: 0),
-    coordinates: [],
-    description:
-        'Чёрный Водопад(Кара Су) находится недалеко от альплагеря "Туюк-Су", поэтому поход к нему является лёгким, прогулочным и подходит для семейного отдыха. Но надо учесть, что водопад сезонный и вода в нём появляется только лишь во время таяния снега. В зимнее время подход осложнён отсутствием тропы, высоким уровнем снега и лавиноопасностью. Рекомендуемый сезон похода к водопаду май-ноябрь.',
-    direction: 'Заилийский Алатау',
-    gorge: 'Малое Алматинское ущелье (МАУ)',
-    difficulty: .medium,
-    distanceKm: 10.5,
-    imageUrl: 'https://morena.kz/foto/allfoto/ver%20mau/ver%20mau%20(3).jpg',
-    type: RouteTypeEntity.lake,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,16 +99,16 @@ class _HomePageState extends State<HomePageContent>
               ],
             ),
             centerTitle: false,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(60),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: CustomSearchBar(
-                  hintText: 'Find things to do',
-                  controller: _searchController,
-                ),
-              ),
-            ),
+            // bottom: PreferredSize(
+            //   preferredSize: Size.fromHeight(60),
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 16),
+            //     child: CustomSearchBar(
+            //       hintText: 'Find things to do',
+            //       controller: _searchController,
+            //     ),
+            //   ),
+            // ),
           ),
           CupertinoSliverRefreshControl(onRefresh: onRefresh),
           SliverToBoxAdapter(child: SizedBox(height: 10)),

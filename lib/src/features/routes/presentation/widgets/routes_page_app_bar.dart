@@ -16,6 +16,7 @@ class RoutesPageAppBar extends StatefulWidget {
     required this.onSortTapped,
     required this.onFilterTapped,
     required this.onSearchQueryChanged,
+    required this.onSearchClear,
   });
 
   final RouteSortingMethodEntity sortingMethod;
@@ -25,6 +26,7 @@ class RoutesPageAppBar extends StatefulWidget {
   final VoidCallback onSortTapped;
   final VoidCallback onFilterTapped;
   final void Function(String query) onSearchQueryChanged;
+  final VoidCallback onSearchClear;
 
   @override
   State<RoutesPageAppBar> createState() => _AppBarState();
@@ -71,6 +73,7 @@ class _AppBarState extends State<RoutesPageAppBar> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: CustomSearchBar(
+                onClear: widget.onSearchClear,
                 hintText: 'Find Your Route',
                 controller: _searchController,
                 onChanged: widget.onSearchQueryChanged,

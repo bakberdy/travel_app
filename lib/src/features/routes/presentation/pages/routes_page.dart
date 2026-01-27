@@ -43,7 +43,6 @@ class _RoutesPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: BlocBuilder<RoutesBloc, RoutesState>(
         builder: (context, state) {
@@ -82,21 +81,32 @@ class _RoutesPageContent extends StatelessWidget {
                       initialDifficialties: state.filteringDifficulties ?? {},
                       initialTypes: state.filteringTypes ?? {},
                       availableRouteTypes: routeTypeState.routeTypes?.toSet(),
-                      onApplyFilters: ({context ,minKm, maxKm, difficialties, types}) {
-                        routesBloc..add(
-                            RoutesEvent.updateFilteringDifficulties(
-                              difficulties: difficialties,
-                            ),
-                          )
-                          ..add(RoutesEvent.updateFilteringTypes(types: types))
-                          ..add(RoutesEvent.updateDistanceRange(minKm, maxKm));
-                      },
+                      onApplyFilters:
+                          ({context, minKm, maxKm, difficialties, types}) {
+                            routesBloc
+                              ..add(
+                                RoutesEvent.updateFilteringDifficulties(
+                                  difficulties: difficialties,
+                                ),
+                              )
+                              ..add(
+                                RoutesEvent.updateFilteringTypes(types: types),
+                              )
+                              ..add(
+                                RoutesEvent.updateDistanceRange(minKm, maxKm),
+                              );
+                          },
                     ),
                   );
                 },
                 onSearchQueryChanged: (String query) {
                   context.read<RoutesBloc>().add(
                     RoutesEvent.updateSearch(searchQuery: query),
+                  );
+                },
+                onSearchClear: () {
+                  context.read<RoutesBloc>().add(
+                    RoutesEvent.updateSearch(searchQuery: ''),
                   );
                 },
               ),

@@ -9,17 +9,21 @@ class CustomSearchBar extends StatelessWidget {
     this.onChanged,
     this.onClear,
     this.hintText,
+     this.focusNode,
   });
   final TextEditingController? controller;
   final void Function(String value)? onSubmitted;
   final void Function(String value)? onChanged;
+
   ///not need to add controller.clear it done by default
   final VoidCallback? onClear;
   final String? hintText;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: focusNode,
       onChanged: onChanged,
       onSubmitted: onSubmitted,
       controller: controller,
@@ -34,7 +38,7 @@ class CustomSearchBar extends StatelessWidget {
                     return SizedBox();
                   }
                   return IconButton(
-                    onPressed: (){
+                    onPressed: () {
                       onClear?.call();
                       controller?.clear();
                     },

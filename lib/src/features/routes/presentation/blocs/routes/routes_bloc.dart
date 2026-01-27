@@ -94,12 +94,10 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
   ) {
     final List<FilterEntity> filters = List.from(state.filters);
     filters.removeWhere((filter) => filter.type == FilterType.type);
-    
+
     if (event.types != null && event.types!.isNotEmpty) {
       for (final type in event.types!) {
-        filters.add(
-          FilterEntity(label: type.name, type: FilterType.type),
-        );
+        filters.add(FilterEntity(label: type.name, type: FilterType.type));
       }
     }
 
@@ -113,7 +111,7 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
   ) {
     final List<FilterEntity> filters = List.from(state.filters);
     filters.removeWhere((filter) => filter.type == FilterType.difficulty);
-    
+
     if (event.difficulties != null && event.difficulties!.isNotEmpty) {
       for (final difficulty in event.difficulties!) {
         filters.add(
@@ -122,7 +120,12 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
       }
     }
 
-    emit(state.copyWith(filteringDifficulties: event.difficulties, filters: filters));
+    emit(
+      state.copyWith(
+        filteringDifficulties: event.difficulties,
+        filters: filters,
+      ),
+    );
     _fetchRoutesWithCurrentParams();
   }
 
@@ -132,21 +135,23 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
   ) {
     final List<FilterEntity> filters = List.from(state.filters);
     filters.removeWhere((filter) => filter.type == FilterType.range);
-    
+
     if (event.maxKm != null && event.minKm != null) {
       filters.add(
-        FilterEntity(label: '${event.minKm}-${event.maxKm}', type: FilterType.range),
+        FilterEntity(
+          label: '${event.minKm}-${event.maxKm}',
+          type: FilterType.range,
+        ),
       );
     }
 
-    emit(state.copyWith(minKm: event.minKm, maxKm: event.maxKm, filters: filters));
+    emit(
+      state.copyWith(minKm: event.minKm, maxKm: event.maxKm, filters: filters),
+    );
     _fetchRoutesWithCurrentParams();
   }
 
-  void _onRemoveFilter(
-    RemoveFilterEvent event,
-    Emitter<RoutesState> emit,
-  ) {
+  void _onRemoveFilter(RemoveFilterEvent event, Emitter<RoutesState> emit) {
     final List<FilterEntity> filters = List.from(state.filters);
     filters.removeWhere((filter) => filter == event.filter);
 
@@ -160,20 +165,26 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
         final updatedDifficulties = state.filteringDifficulties
             ?.where((d) => d.name != event.filter.label)
             .toSet();
-        emit(state.copyWith(
-          filteringDifficulties: updatedDifficulties?.isEmpty ?? true ? null : updatedDifficulties,
-          filters: filters,
-        ));
+        emit(
+          state.copyWith(
+            filteringDifficulties: updatedDifficulties?.isEmpty ?? true
+                ? null
+                : updatedDifficulties,
+            filters: filters,
+          ),
+        );
         break;
       case FilterType.type:
         // Remove this specific type from the set
         final updatedTypes = state.filteringTypes
             ?.where((t) => t.name != event.filter.label)
             .toSet();
-        emit(state.copyWith(
-          filteringTypes: updatedTypes?.isEmpty ?? true ? null : updatedTypes,
-          filters: filters,
-        ));
+        emit(
+          state.copyWith(
+            filteringTypes: updatedTypes?.isEmpty ?? true ? null : updatedTypes,
+            filters: filters,
+          ),
+        );
         break;
       case FilterType.range:
         emit(state.copyWith(minKm: null, maxKm: null, filters: filters));
@@ -196,7 +207,7 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
       maxKm: state.maxKm,
       types: state.filteringTypes?.toList(),
       category: state.filteringCategory,
-      searchQuery: state.searchQuery
+      searchQuery: state.searchQuery.isEmpty ? null : state.searchQuery,
     );
   }
 }
