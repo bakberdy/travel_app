@@ -9,11 +9,8 @@ import 'package:travel_app/src/core/utils/extensions/context_extensions.dart';
 import 'package:travel_app/src/core/utils/extensions/string_extensions.dart';
 import 'package:travel_app/src/features/routes/presentation/blocs/route_types/route_type_bloc.dart';
 import 'package:travel_app/src/features/routes/presentation/blocs/routes_by_category/routes_by_category_bloc.dart';
-import '../../domain/entities/location_entity.dart';
-import '../../domain/entities/route_entity.dart';
 import '../../domain/entities/route_type_entity.dart';
 import '../widgets/category_section.dart';
-import '../widgets/custom_search_bar.dart';
 import '../widgets/location_button.dart';
 
 @RoutePage()
