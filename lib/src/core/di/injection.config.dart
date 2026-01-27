@@ -40,6 +40,8 @@ import 'package:travel_app/src/features/routes/presentation/blocs/route_types/ro
     as _i204;
 import 'package:travel_app/src/features/routes/presentation/blocs/routes/routes_bloc.dart'
     as _i446;
+import 'package:travel_app/src/features/routes/presentation/blocs/routes_by_category/routes_by_category_bloc.dart'
+    as _i97;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -86,6 +88,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i446.RoutesBloc>(
       () => _i446.RoutesBloc(gh<_i990.GetRoutesUsecase>()),
+    );
+    gh.factory<_i97.RoutesByCategoryBloc>(
+      () => _i97.RoutesByCategoryBloc(gh<_i990.GetRoutesUsecase>()),
     );
     return this;
   }
