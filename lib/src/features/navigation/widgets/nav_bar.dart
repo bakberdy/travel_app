@@ -58,7 +58,7 @@ class _NavBarState extends State<NavBar> {
     final indicatorRight = totalWidth - indicatorLeft - widget.itemWidth;
     final isLtr = context.isRTL;
     final theme = Theme.of(context);
-    final sliderColor = widget.sliderColor ?? theme.primaryColor.withAlpha(100);
+    final sliderColor = widget.sliderColor ?? theme.colorScheme.surfaceContainer;
 
     return SafeArea(
       child: Padding(
