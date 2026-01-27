@@ -11,6 +11,7 @@ class GetRouteRequestParametersEntity {
   final Set<RouteDifficultyEntity>? difficulties;
   final double? minKm;
   final double? maxKm;
+  final String? searchQuery;
 
   GetRouteRequestParametersEntity({
     this.types,
@@ -19,5 +20,6 @@ class GetRouteRequestParametersEntity {
     this.difficulties,
     this.minKm,
     this.maxKm,
+    this.searchQuery,
   });
 }

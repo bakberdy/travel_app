@@ -196,6 +196,7 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
       maxKm: state.maxKm,
       types: state.filteringTypes?.toList(),
       category: state.filteringCategory,
+      searchQuery: state.searchQuery
     );
   }
 }
